@@ -9,3 +9,6 @@ _site/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local owner notes (private, not committed)
+OWNER_NOTES.local.md

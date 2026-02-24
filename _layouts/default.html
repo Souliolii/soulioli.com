@@ -203,10 +203,15 @@
       align-items:center;
       gap: 8px;
       position: relative;
+      z-index: 250;
+    }
+    .social-links{
+      display:flex;
+      align-items:center;
+      gap: 8px;
       border-left: 1px solid var(--border);
       padding-left: 12px;
-      margin-left: 10px;
-      z-index: 250;
+      margin-left: 2px;
     }
     .icon-btn{
       width: 34px;
@@ -507,15 +512,17 @@
           <button class="theme-option" data-theme-option="dark" type="button">Dark <span>D</span></button>
           <button class="theme-option" data-theme-option="amoled" type="button">AMOLED <span>A</span></button>
         </div>
-        <a class="icon-btn" href="{{ site.social.github }}" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.3c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.5 0 0 1.1-.4 3.6 1.3a12 12 0 0 1 6.5 0c2.5-1.7 3.6-1.3 3.6-1.3.7 1.8.2 3.2.1 3.5.8.9 1.3 2 1.3 3.4 0 4.7-2.9 5.8-5.7 6.1.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
-        </a>
-        <a class="icon-btn" href="{{ site.social.discord }}" target="_blank" rel="noopener" aria-label="Discord">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A16.8 16.8 0 0 0 16.2 3l-.2.5a11.5 11.5 0 0 1 3.4 1.6 12.9 12.9 0 0 0-4.1-1.3 13.5 13.5 0 0 0-6.6 0A12.9 12.9 0 0 0 4.6 5a11.5 11.5 0 0 1 3.4-1.6L7.8 3a16.8 16.8 0 0 0-4.1 1.4C1.2 8 0.6 11.5 0.8 15a16.8 16.8 0 0 0 5 2.5l1.1-1.8c-.6-.2-1.2-.5-1.8-.8l.4-.3c3.4 1.6 7.1 1.6 10.4 0l.4.3c-.6.3-1.2.6-1.8.8l1.1 1.8a16.8 16.8 0 0 0 5-2.5c.3-4-.6-7.5-2.9-10.6ZM8.7 13.2c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
-        </a>
-        <a class="icon-btn" href="{{ site.social.reddit }}" target="_blank" rel="noopener" aria-label="Reddit">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a2.4 2.4 0 0 0-4.1-1.7 10 10 0 0 0-6.4-2.1l1.1-3.4 3 0a1.8 1.8 0 1 0 0-1.2h-3.4a.6.6 0 0 0-.6.4l-1.3 4.2a10 10 0 0 0-6.2 2.1A2.4 2.4 0 1 0 4.2 14v.3C4.2 17.5 7.8 20 12 20s7.8-2.5 7.8-5.7V14A2.4 2.4 0 0 0 24 12ZM8.9 13.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Zm6.2 3.3a4.6 4.6 0 0 1-6.2 0 .6.6 0 0 1 .8-.9 3.3 3.3 0 0 0 4.6 0 .6.6 0 1 1 .8.9Zm0-3.3a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>
-        </a>
+        <div class="social-links">
+          <a class="icon-btn" href="{{ site.social.github }}" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.3c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.5 0 0 1.1-.4 3.6 1.3a12 12 0 0 1 6.5 0c2.5-1.7 3.6-1.3 3.6-1.3.7 1.8.2 3.2.1 3.5.8.9 1.3 2 1.3 3.4 0 4.7-2.9 5.8-5.7 6.1.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+          </a>
+          <a class="icon-btn" href="{{ site.social.discord }}" target="_blank" rel="noopener" aria-label="Discord">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A16.8 16.8 0 0 0 16.2 3l-.2.5a11.5 11.5 0 0 1 3.4 1.6 12.9 12.9 0 0 0-4.1-1.3 13.5 13.5 0 0 0-6.6 0A12.9 12.9 0 0 0 4.6 5a11.5 11.5 0 0 1 3.4-1.6L7.8 3a16.8 16.8 0 0 0-4.1 1.4C1.2 8 0.6 11.5 0.8 15a16.8 16.8 0 0 0 5 2.5l1.1-1.8c-.6-.2-1.2-.5-1.8-.8l.4-.3c3.4 1.6 7.1 1.6 10.4 0l.4.3c-.6.3-1.2.6-1.8.8l1.1 1.8a16.8 16.8 0 0 0 5-2.5c.3-4-.6-7.5-2.9-10.6ZM8.7 13.2c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
+          </a>
+          <a class="icon-btn" href="{{ site.social.reddit }}" target="_blank" rel="noopener" aria-label="Reddit">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a2.4 2.4 0 0 0-4.1-1.7 10 10 0 0 0-6.4-2.1l1.1-3.4 3 0a1.8 1.8 0 1 0 0-1.2h-3.4a.6.6 0 0 0-.6.4l-1.3 4.2a10 10 0 0 0-6.2 2.1A2.4 2.4 0 1 0 4.2 14v.3C4.2 17.5 7.8 20 12 20s7.8-2.5 7.8-5.7V14A2.4 2.4 0 0 0 24 12ZM8.9 13.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Zm6.2 3.3a4.6 4.6 0 0 1-6.2 0 .6.6 0 0 1 .8-.9 3.3 3.3 0 0 0 4.6 0 .6.6 0 1 1 .8.9Zm0-3.3a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
