@@ -2,7 +2,7 @@
 layout: post
 title: "First Post"
 date: 2026-02-24 15:00:00 -0500
-tags: [guide]   # must match a section tag in _config.yml
+tags: [note]   # must match a section tag in _config.yml
 pinned: true
 pin_order: 1
 ---
