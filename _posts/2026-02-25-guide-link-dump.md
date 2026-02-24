@@ -2,9 +2,9 @@
 layout: post
 title: "Guide Link Dump"
 date: 2026-02-25 12:15:00 -0500
-tags: [guide, note]
+tags: [note]
 pinned: true
-pin_order: 3
+pin_order: 2
 ---
 
 Collected guide links and references in one place.
