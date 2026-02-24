@@ -4,22 +4,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% if page.title %}{{ page.title }} - {% endif %}Soulioli</title>
+  <meta name="color-scheme" content="dark light" />
   <style>
+    /* Theme tokens: edit these values to quickly reskin the whole site */
     :root{
-      --bg: #f6f3ec;
-      --panel: #fbfaf6;
-      --text: #1f1e1a;
-      --muted: #5f5b52;
-      --faint: #8a8376;
-      --border: #d8d0c2;
-      --link: #1c4f86;
+      --bg: #0b0f18;
+      --bg-accent-a: rgba(94, 134, 255, 0.16);
+      --bg-accent-b: rgba(45, 214, 201, 0.10);
+      --panel: rgba(18, 23, 35, 0.86);
+      --panel-soft: rgba(255, 255, 255, 0.02);
+      --heading-bg: rgba(255, 255, 255, 0.03);
+      --text: #eef3ff;
+      --muted: #a2afc7;
+      --faint: #7f8ca4;
+      --border: rgba(255, 255, 255, 0.12);
+      --link: #9fc1ff;
       --max: 880px;
+    }
+
+    /* Optional light mode fallback for users who force light preference */
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f3ec;
+        --bg-accent-a: rgba(70, 108, 178, 0.09);
+        --bg-accent-b: rgba(112, 95, 67, 0.07);
+        --panel: #fbfaf6;
+        --panel-soft: rgba(0, 0, 0, 0.015);
+        --heading-bg: #f3eee4;
+        --text: #1f1e1a;
+        --muted: #5f5b52;
+        --faint: #8a8376;
+        --border: #d8d0c2;
+        --link: #1c4f86;
+      }
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      background: var(--bg);
+      background:
+        radial-gradient(1100px 680px at 8% -12%, var(--bg-accent-a), transparent 55%),
+        radial-gradient(900px 620px at 95% 0%, var(--bg-accent-b), transparent 58%),
+        var(--bg);
       color: var(--text);
       font-family: Georgia, "Times New Roman", serif;
       line-height: 1.7;
@@ -69,7 +95,7 @@
       display:inline-flex; align-items:center; gap:8px;
       padding: 4px 10px;
       border: 1px solid var(--border);
-      background: var(--panel);
+      background: var(--panel-soft);
       border-radius: 4px;
       color: var(--muted);
       font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
@@ -105,7 +131,7 @@
     .card .hd{
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
-      background: #f3eee4;
+      background: var(--heading-bg);
       color: var(--muted);
       font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
       font-size: .82rem;
