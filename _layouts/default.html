@@ -178,6 +178,8 @@
       border-radius: var(--radius);
       background: var(--topbar-bg);
       backdrop-filter: blur(7px);
+      position: relative;
+      z-index: 200;
     }
     .brand{
       display:flex;
@@ -201,6 +203,10 @@
       align-items:center;
       gap: 8px;
       position: relative;
+      border-left: 1px solid var(--border);
+      padding-left: 12px;
+      margin-left: 10px;
+      z-index: 250;
     }
     .icon-btn{
       width: 34px;
@@ -237,7 +243,7 @@
       box-shadow: 0 12px 26px var(--card-shadow);
       padding: 6px;
       display:none;
-      z-index: 30;
+      z-index: 1000;
     }
     .theme-menu.is-open{ display:block; }
     .theme-option{
