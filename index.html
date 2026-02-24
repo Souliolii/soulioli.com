@@ -3,9 +3,20 @@ layout: default
 title: Home
 ---
 
-<div class="hero">
-  <h1>Notes, projects, and internet breadcrumbs.</h1>
-  <p>A running log of things I'm building, learning, testing, and trying to understand.</p>
+<div class="hero hero-home">
+  <div class="hero-split">
+    <div>
+      <div class="eyebrow">Latest update</div>
+      <h1><span class="brand-gradient">soulioli archive</span></h1>
+      <p>A running log of things I'm building, learning, testing, and trying to understand.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/archive">Browse Archive</a>
+        <a class="btn" href="/about">About This Site</a>
+        <a class="btn" href="https://github.com/Souliolii/soulioli.com">Source</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true"></div>
+  </div>
 </div>
 
 <div class="grid">
@@ -24,7 +35,7 @@ title: Home
         </a>
       {% endfor %}
       <div style="margin-top:10px;">
-        <a class="pill" href="/archive">View all posts -></a>
+        <a class="pill" href="/archive">View all posts</a>
       </div>
     </div>
   </div>
@@ -33,9 +44,24 @@ title: Home
     <div class="hd">Focus Areas</div>
     <div class="bd">
       <p style="margin-top:0;color:var(--muted);">Current buckets for this site.</p>
-      <p style="margin:8px 0;">Building things and coding experiments</p>
-      <p style="margin:8px 0;">Notes on tools, systems, and workflows</p>
-      <p style="margin:8px 0;">Games and side interests</p>
+      <div class="tile-grid">
+        <div class="tile">
+          <h3>Building + Coding</h3>
+          <p>Projects, ideas, and implementation notes.</p>
+        </div>
+        <div class="tile">
+          <h3>Systems + Workflow</h3>
+          <p>Tools, process, and setup improvements.</p>
+        </div>
+        <div class="tile">
+          <h3>Games + Side Interests</h3>
+          <p>OSRS notes, experiments, and occasional tangents.</p>
+        </div>
+        <div class="tile">
+          <h3>References</h3>
+          <p>Links and small things worth keeping around.</p>
+        </div>
+      </div>
       <div style="margin-top:12px;">
         <a class="pill" href="/archive">Browse full archive</a>
       </div>

@@ -7,6 +7,6 @@ tags: []
 
 Welcome,
 
-this website and the posts that follow will be of things that I either find an interest in or something I want to share.
+This website and the posts that follow will be of things that I either find an interest in or something I want to share.
 
 Enjoy.
