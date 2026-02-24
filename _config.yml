@@ -16,7 +16,10 @@ pinned_sections:
   - id: notes
     label: Notes
     tag: note
-    
+  - id: game
+    label: Game
+    tag: game
+
 # Makes URLs nice like /first-log-entry/ instead of /2026/02/24/...
 permalink: /:title/
 

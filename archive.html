@@ -11,15 +11,43 @@ title: Archive
 <div class="card">
   <div class="bd">
     {% assign sorted_posts = site.posts | sort: "date" | reverse %}
-    {% for post in sorted_posts %}
-      <div class="post-item" style="padding: 12px 0;">
-        <div class="post-title" style="margin:0 0 3px;">
-          <a href="{{ post.url }}">{{ post.title }}</a>
+    <div class="pin-tabs" role="tablist" aria-label="Archive tag sections">
+      <button class="pin-tab is-active" type="button" data-archive-target="all" role="tab" aria-selected="true">All</button>
+      {% assign all_tags = site.tags | sort %}
+      {% for tag in all_tags %}
+        <button class="pin-tab" type="button" data-archive-target="{{ tag[0] | slugify }}" role="tab" aria-selected="false">{{ tag[0] }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="pin-panel is-active" data-archive-panel="all" role="tabpanel">
+      {% for post in sorted_posts %}
+        <div class="post-item" style="padding: 12px 0;">
+          <div class="post-title" style="margin:0 0 3px;">
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </div>
+          <div class="meta">
+            <span>{{ post.date | date: "%B %d, %Y" }}</span>
+            {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+          </div>
         </div>
-        <div class="meta">
-          <span>{{ post.date | date: "%B %d, %Y" }}</span>
-          {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
-        </div>
+      {% endfor %}
+    </div>
+
+    {% for tag in all_tags %}
+      <div class="pin-panel" data-archive-panel="{{ tag[0] | slugify }}" role="tabpanel">
+        {% for post in sorted_posts %}
+          {% if post.tags contains tag[0] %}
+            <div class="post-item" style="padding: 12px 0;">
+              <div class="post-title" style="margin:0 0 3px;">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </div>
+              <div class="meta">
+                <span>{{ post.date | date: "%B %d, %Y" }}</span>
+                {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     {% endfor %}
   </div>
@@ -28,3 +56,30 @@ title: Archive
 <div style="margin-top:14px;">
   <a class="pill" href="/">&larr; Back to Home</a>
 </div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll("[data-archive-target]");
+    var panels = document.querySelectorAll("[data-archive-panel]");
+    if (!tabs.length || !panels.length) return;
+
+    function setActive(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-archive-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        var isActive = panel.getAttribute("data-archive-panel") === targetId;
+        panel.classList.toggle("is-active", isActive);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        setActive(tab.getAttribute("data-archive-target"));
+      });
+    });
+  })();
+</script>
