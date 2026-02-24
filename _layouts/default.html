@@ -8,6 +8,7 @@
   <style>
     /* Theme tokens: edit these values to quickly reskin the whole site */
     :root{
+      /* Core palette */
       --bg: #111317;
       --bg-accent-a: rgba(70, 145, 255, 0.22);
       --bg-accent-b: rgba(190, 116, 255, 0.16);
@@ -22,6 +23,27 @@
       --link: #8dc0ff;
       --brand-a: #76c7ff;
       --brand-b: #c5a1ff;
+
+      /* Surface and effect tokens */
+      --topbar-bg: rgba(17, 20, 27, 0.75);
+      --card-gradient-top: rgba(255, 255, 255, 0.02);
+      --tile-gradient-a: rgba(118, 199, 255, 0.08);
+      --tile-gradient-b: rgba(197, 161, 255, 0.04);
+      --hero-glow-core: rgba(255, 255, 255, 0.18);
+      --hero-glow-a: rgba(112, 201, 255, 0.44);
+      --hero-glow-b: rgba(196, 138, 255, 0.40);
+      --logo-shadow: rgba(145, 200, 255, 0.45);
+      --play-icon: rgba(255, 255, 255, 0.95);
+      --card-shadow: rgba(0, 0, 0, 0.24);
+
+      /* Button tokens */
+      --btn-primary-a: #67b7ff;
+      --btn-primary-b: #7f9cff;
+      --btn-primary-text: #12131a;
+      --btn-neutral-bg: rgba(255, 255, 255, 0.10);
+      --btn-highlight-bg: rgba(141, 192, 255, 0.14);
+      --btn-highlight-border: rgba(141, 192, 255, 0.5);
+
       --max: 1180px;
       --radius: 14px;
     }
@@ -43,6 +65,22 @@
         --link: #1c4f86;
         --brand-a: #2d7fce;
         --brand-b: #7a56bf;
+        --topbar-bg: rgba(255, 255, 255, 0.75);
+        --card-gradient-top: rgba(0, 0, 0, 0.02);
+        --tile-gradient-a: rgba(45, 127, 206, 0.08);
+        --tile-gradient-b: rgba(122, 86, 191, 0.04);
+        --hero-glow-core: rgba(255, 255, 255, 0.7);
+        --hero-glow-a: rgba(45, 127, 206, 0.25);
+        --hero-glow-b: rgba(122, 86, 191, 0.22);
+        --logo-shadow: rgba(80, 110, 170, 0.35);
+        --play-icon: rgba(255, 255, 255, 0.95);
+        --card-shadow: rgba(10, 10, 10, 0.10);
+        --btn-primary-a: #5ba7f2;
+        --btn-primary-b: #7992ec;
+        --btn-primary-text: #0f1220;
+        --btn-neutral-bg: rgba(0, 0, 0, 0.06);
+        --btn-highlight-bg: rgba(45, 127, 206, 0.12);
+        --btn-highlight-border: rgba(45, 127, 206, 0.35);
       }
     }
 
@@ -70,7 +108,7 @@
       padding: 10px 14px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: rgba(17, 20, 27, 0.75);
+      background: var(--topbar-bg);
       backdrop-filter: blur(7px);
     }
     .brand{
@@ -163,14 +201,20 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       color: var(--text);
-      background: rgba(255,255,255,0.10);
+      background: var(--btn-neutral-bg);
       font-size: .94rem;
       font-weight: 700;
+      transition: background .15s ease, border-color .15s ease, color .15s ease, filter .15s ease;
     }
     .btn:hover{ text-decoration:none; filter: brightness(1.08); }
+    .btn-highlight:hover{
+      background: var(--btn-highlight-bg);
+      border-color: var(--btn-highlight-border);
+      color: var(--text);
+    }
     .btn-primary{
-      background: linear-gradient(90deg, #67b7ff, #7f9cff);
-      color: #12131a;
+      background: linear-gradient(90deg, var(--btn-primary-a), var(--btn-primary-b));
+      color: var(--btn-primary-text);
       border: none;
     }
     .hero-visual{
@@ -178,9 +222,9 @@
       border-radius: 22px;
       position: relative;
       background:
-        radial-gradient(170px 170px at 50% 50%, rgba(255,255,255,0.18), transparent 70%),
-        radial-gradient(220px 220px at 50% 48%, rgba(112,201,255,0.44), transparent 62%),
-        radial-gradient(280px 280px at 50% 52%, rgba(196,138,255,0.40), transparent 66%);
+        radial-gradient(170px 170px at 50% 50%, var(--hero-glow-core), transparent 70%),
+        radial-gradient(220px 220px at 50% 48%, var(--hero-glow-a), transparent 62%),
+        radial-gradient(280px 280px at 50% 52%, var(--hero-glow-b), transparent 66%);
       overflow: hidden;
     }
     .hero-visual-logo{
@@ -190,7 +234,7 @@
       width: 190px;
       height: 190px;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(145, 200, 255, 0.45));
+      filter: drop-shadow(0 0 18px var(--logo-shadow));
       z-index: 2;
     }
     .hero-visual.is-fallback::before{
@@ -202,9 +246,9 @@
       height: 0;
       border-top: 82px solid transparent;
       border-bottom: 82px solid transparent;
-      border-left: 132px solid rgba(255,255,255,0.95);
+      border-left: 132px solid var(--play-icon);
       transform: translateX(14px);
-      filter: drop-shadow(0 0 18px rgba(145, 200, 255, 0.45));
+      filter: drop-shadow(0 0 18px var(--logo-shadow));
     }
 
     .grid{
@@ -219,9 +263,9 @@
 
     .card{
       border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 56%), var(--panel);
+      background: linear-gradient(180deg, var(--card-gradient-top), transparent 56%), var(--panel);
       border-radius: var(--radius);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 16px 32px var(--card-shadow);
     }
     .card .hd{
       padding: 12px 14px;
@@ -263,7 +307,7 @@
     .tile{
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: linear-gradient(140deg, rgba(118,199,255,0.08), rgba(197,161,255,0.04)), var(--panel-2);
+      background: linear-gradient(140deg, var(--tile-gradient-a), var(--tile-gradient-b)), var(--panel-2);
       padding: 12px;
     }
     .tile h3{
@@ -300,8 +344,6 @@
       </div>
       <div class="nav">
         <a href="/">Home</a>
-        <a href="/archive">Archive</a>
-        <a href="/about">About</a>
       </div>
     </div>
 
