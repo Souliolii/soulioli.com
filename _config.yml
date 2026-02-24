@@ -14,3 +14,4 @@ kramdown:
 # Optional: auto-generate RSS feed (supported on GitHub Pages)
 plugins:
   - jekyll-feed
+  - jekyll-sitemap

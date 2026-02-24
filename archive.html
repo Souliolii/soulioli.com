@@ -5,7 +5,7 @@ title: Archive
 
 <div class="hero">
   <h1>Archive</h1>
-  <p>Everything I’ve posted — newest first.</p>
+  <p>Everything I've posted - newest first.</p>
 </div>
 
 <div class="card">
@@ -17,7 +17,7 @@ title: Archive
         </div>
         <div class="meta">
           <span>{{ post.date | date: "%b %d, %Y" }}</span>
-          {% if post.tags %}<span>•</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+          {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
         </div>
       </div>
     {% endfor %}

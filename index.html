@@ -4,8 +4,8 @@ title: Home
 ---
 
 <div class="hero">
-  <h1>Website Header Goes Here. 👌</h1>
-  <p>A lightweight place to write things I want to remember: notes, experiments, OSRS stuff, and whatever I’m building.</p>
+  <h1>Website Header Goes Here.</h1>
+  <p>A lightweight place to write things I want to remember: notes, experiments, OSRS stuff, and whatever I'm building.</p>
 </div>
 
 <div class="grid">
@@ -17,13 +17,13 @@ title: Home
           <div class="post-title">{{ post.title }}</div>
           <div class="meta">
             <span>{{ post.date | date: "%b %d, %Y" }}</span>
-            {% if post.tags %}<span>•</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+            {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
           </div>
           {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
         </a>
       {% endfor %}
       <div style="margin-top:10px;">
-        <a class="pill" href="/archive">View all posts →</a>
+        <a class="pill" href="/archive">View all posts -></a>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ title: Home
       <hr style="border:0;border-top:1px solid var(--border); margin:16px 0;">
 
       <p style="margin:0;color:var(--muted);">
-        Tip: Waine is a stinky!</code>
+        Tip: Waine is a stinky!
       </p>
     </div>
   </div>
