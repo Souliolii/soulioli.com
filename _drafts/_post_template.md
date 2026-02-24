@@ -1,9 +1,9 @@
-YYYY-MM-DD-title.md
 ---
 layout: post
-title: ""
-date: 2026-02-24 12:00:00 -0500
-tags: []
+title: "Your Title"
+date: 2026-02-24 15:00:00 -0500
+tags: [build]   # must match a section tag in _config.yml
+pinned: true
+pin_order: 1
 ---
 
-Write here.

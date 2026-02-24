@@ -1,8 +1,10 @@
 ---
 layout: post
-title: "Welcome to the Site"
-date: 2026-02-24 14:26:00 -0500
-tags: []
+title: "Your Title"
+date: 2026-02-24 15:00:00 -0500
+tags: [build]   # must match a section tag in _config.yml
+pinned: true
+pin_order: 1
 ---
 
 Welcome,
