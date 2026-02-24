@@ -296,6 +296,37 @@
       display:flex; gap: 10px; flex-wrap:wrap;
     }
     .excerpt{ margin: 6px 0 0; color: var(--faint); font-size: .98rem; }
+    .pin-tabs{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .pin-tab{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      color: var(--muted);
+      font-size: .84rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .pin-tab:hover{
+      color: var(--text);
+      text-decoration: none;
+      border-color: var(--btn-highlight-border);
+    }
+    .pin-tab.is-active{
+      color: var(--text);
+      background: var(--btn-highlight-bg);
+      border-color: var(--btn-highlight-border);
+    }
+    .pin-panel{ display:none; }
+    .pin-panel.is-active{ display:block; }
     .tile-grid{
       display:grid;
       grid-template-columns: 1fr;

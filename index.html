@@ -45,30 +45,88 @@ title: Home
   </div>
 
   <div class="card">
-    <div class="hd">Focus Areas</div>
+    <div class="hd">Pinned Posts</div>
     <div class="bd">
-      <p style="margin-top:0;color:var(--muted);">Current buckets for this site.</p>
-      <div class="tile-grid">
-        <div class="tile">
-          <h3>Building + Coding</h3>
-          <p>Projects, ideas, and implementation notes.</p>
-        </div>
-        <div class="tile">
-          <h3>Systems + Workflow</h3>
-          <p>Tools, process, and setup improvements.</p>
-        </div>
-        <div class="tile">
-          <h3>Games + Side Interests</h3>
-          <p>OSRS notes, experiments, and occasional tangents.</p>
-        </div>
-        <div class="tile">
-          <h3>References</h3>
-          <p>Links and small things worth keeping around.</p>
-        </div>
-      </div>
+      {% assign pinned_posts = site.posts | where: "pinned", true | sort: "pin_order" %}
+      {% if pinned_posts.size > 0 %}
+        {% if site.pinned_sections and site.pinned_sections.size > 0 %}
+          <div class="pin-tabs" role="tablist" aria-label="Pinned post sections">
+            {% for section in site.pinned_sections %}
+              <button class="pin-tab{% if forloop.first %} is-active{% endif %}" type="button" data-pin-target="{{ section.id }}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                {{ section.label }}
+              </button>
+            {% endfor %}
+          </div>
+
+          {% for section in site.pinned_sections %}
+            <div class="pin-panel{% if forloop.first %} is-active{% endif %}" data-pin-panel="{{ section.id }}" role="tabpanel">
+              {% if section.tag == "all" %}
+                {% assign section_posts = pinned_posts %}
+              {% else %}
+                {% assign section_posts = pinned_posts | where_exp: "post", "post.tags contains section.tag" %}
+              {% endif %}
+
+              {% if section_posts.size > 0 %}
+                {% for post in section_posts limit: 4 %}
+                  <a class="post-item" href="{{ post.url }}">
+                    <div class="post-title">{{ post.title }}</div>
+                    <div class="meta">
+                      <span>{{ post.date | date: "%b %d, %Y" }}</span>
+                      {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+                    </div>
+                    {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
+                  </a>
+                {% endfor %}
+              {% else %}
+                <p style="margin-top:0;color:var(--muted);">No pinned posts in this section yet.</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for post in pinned_posts limit: 4 %}
+            <a class="post-item" href="{{ post.url }}">
+              <div class="post-title">{{ post.title }}</div>
+              <div class="meta">
+                <span>{{ post.date | date: "%b %d, %Y" }}</span>
+                {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+              </div>
+              {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
+            </a>
+          {% endfor %}
+        {% endif %}
+      {% else %}
+        <p style="margin-top:0;color:var(--muted);">No pinned posts yet.</p>
+        <p style="margin-top:8px;color:var(--faint);">Add <code>pinned: true</code> to a post's front matter to pin it here.</p>
+      {% endif %}
       <div style="margin-top:12px;">
         <a class="pill" href="/archive">Browse full archive</a>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll("[data-pin-target]");
+    var panels = document.querySelectorAll("[data-pin-panel]");
+    if (!tabs.length || !panels.length) return;
+
+    function setActive(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-pin-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+      panels.forEach(function (panel) {
+        var isActive = panel.getAttribute("data-pin-panel") === targetId;
+        panel.classList.toggle("is-active", isActive);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        setActive(tab.getAttribute("data-pin-target"));
+      });
+    });
+  })();
+</script>
