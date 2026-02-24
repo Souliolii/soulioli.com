@@ -1,62 +1,48 @@
 ---
 layout: default
+title: Home
 ---
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Soulioli Log</title>
+<div class="hero">
+  <h1>Soulioli Log</h1>
+  <p>A lightweight place to write things I want to remember: notes, experiments, OSRS stuff, and whatever I’m building.</p>
+</div>
 
-  <style>
-    body {
-      background: #0f0f0f;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    a {
-      color: #7aa2ff;
-      text-decoration: none;
-    }
-
-    .post {
-      border-bottom: 1px solid #333;
-      padding: 20px 0;
-    }
-
-    .date {
-      color: #777;
-      font-size: 0.9em;
-    }
-  </style>
-</head>
-
-<body>
-
-<h1>Soulioli — Log</h1>
-
-<p style="text-align:center;color:#888;">
-Personal notes, projects, and reminders.
-</p>
-
-{% for post in site.posts %}
-  <div class="post">
-    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="date">{{ post.date | date: "%B %d, %Y" }}</div>
-    <p>{{ post.excerpt }}</p>
+<div class="grid">
+  <div class="card">
+    <div class="hd">Latest entries</div>
+    <div class="bd">
+      {% for post in site.posts limit: 8 %}
+        <a class="post-item" href="{{ post.url }}" style="display:block; margin-bottom:12px;">
+          <div class="post-title">{{ post.title }}</div>
+          <div class="meta">
+            <span>{{ post.date | date: "%b %d, %Y" }}</span>
+            {% if post.tags %}<span>•</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+          </div>
+          {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
+        </a>
+      {% endfor %}
+      <div style="margin-top:10px;">
+        <a class="pill" href="/archive">View all posts →</a>
+      </div>
+    </div>
   </div>
-{% endfor %}
 
-</body>
-</html>
+  <div class="card">
+    <div class="hd">Quick links</div>
+    <div class="bd">
+      <p style="margin-top:0;color:var(--muted);">Shortcuts I actually use.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="pill" href="/about">What is this?</a>
+        <a class="pill" href="https://github.com/Souliolii/soulioli.com">Repo</a>
+        <a class="pill" href="/archive">Archive</a>
+      </div>
 
-</body>
-</html>
+      <hr style="border:0;border-top:1px solid var(--border); margin:16px 0;">
+
+      <p style="margin:0;color:var(--muted);">
+        Tip: new posts go in <code style="color:var(--text);">_posts/YYYY-MM-DD-title.md</code>
+      </p>
+    </div>
+  </div>
+</div>
