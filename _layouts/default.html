@@ -569,6 +569,23 @@
         }
       });
     })();
+
+    (function () {
+      var links = document.querySelectorAll("a[href]");
+      links.forEach(function (a) {
+        var href = a.getAttribute("href");
+        if (!href) return;
+        if (href.startsWith("#")) return;
+        if (href.startsWith("/")) return;
+        if (href.startsWith("mailto:") || href.startsWith("tel:")) return;
+
+        var isExternal = /^https?:\/\//i.test(href);
+        if (isExternal) {
+          a.setAttribute("target", "_blank");
+          a.setAttribute("rel", "noopener noreferrer");
+        }
+      });
+    })();
   </script>
 </body>
 </html>
