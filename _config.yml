@@ -10,6 +10,9 @@ pinned_sections:
   - id: all
     label: All
     tag: all
+  - id: build
+    label: Build
+    tag: build
   - id: guides
     label: Guides
     tag: guide

@@ -26,17 +26,19 @@ title: Home
   <div class="card">
     <div class="hd">Latest entries</div>
     <div class="bd">
-      {% assign sorted_posts = site.posts | sort: "date" | reverse %}
-      {% for post in sorted_posts limit: 8 %}
-        <a class="post-item" href="{{ post.url }}">
-          <div class="post-title">{{ post.title }}</div>
-          <div class="meta">
-            <span>{{ post.date | date: "%b %d, %Y" }}</span>
-            {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
-          </div>
-          {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
-        </a>
-      {% endfor %}
+      <div class="post-scroll">
+        {% assign sorted_posts = site.posts | sort: "date" | reverse %}
+        {% for post in sorted_posts limit: 30 %}
+          <a class="post-item" href="{{ post.url }}">
+            <div class="post-title">{{ post.title }}</div>
+            <div class="meta">
+              <span>{{ post.date | date: "%b %d, %Y" }}</span>
+              {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+            </div>
+            {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
+          </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 
@@ -55,7 +57,7 @@ title: Home
           </div>
 
           {% for section in site.pinned_sections %}
-            <div class="pin-panel{% if forloop.first %} is-active{% endif %}" data-pin-panel="{{ section.id }}" role="tabpanel">
+            <div class="pin-panel post-scroll{% if forloop.first %} is-active{% endif %}" data-pin-panel="{{ section.id }}" role="tabpanel">
               {% if section.tag == "all" %}
                 {% assign section_posts = pinned_posts %}
               {% else %}
@@ -63,7 +65,7 @@ title: Home
               {% endif %}
 
               {% if section_posts.size > 0 %}
-                {% for post in section_posts limit: 4 %}
+                {% for post in section_posts limit: 30 %}
                   <a class="post-item" href="{{ post.url }}">
                     <div class="post-title">{{ post.title }}</div>
                     <div class="meta">
@@ -79,7 +81,8 @@ title: Home
             </div>
           {% endfor %}
         {% else %}
-          {% for post in pinned_posts limit: 4 %}
+          <div class="post-scroll">
+          {% for post in pinned_posts limit: 30 %}
             <a class="post-item" href="{{ post.url }}">
               <div class="post-title">{{ post.title }}</div>
               <div class="meta">
@@ -89,6 +92,7 @@ title: Home
               {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
             </a>
           {% endfor %}
+          </div>
         {% endif %}
       {% else %}
         <p style="margin-top:0;color:var(--muted);">No pinned posts yet.</p>

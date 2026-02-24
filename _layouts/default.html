@@ -52,6 +52,7 @@
 
       --max: 1180px; /* Max content width */
       --radius: 14px; /* Standard corner radius */
+      --feed-max-height: 320px; /* Max height for scrollable post lists on Home */
     }
 
     /* Optional light mode fallback for users who force light preference */
@@ -318,6 +319,11 @@
       display:flex; gap: 10px; flex-wrap:wrap;
     }
     .excerpt{ margin: 6px 0 0; color: var(--faint); font-size: .98rem; }
+    .post-scroll{
+      max-height: var(--feed-max-height);
+      overflow-y: auto;
+      padding-right: 4px;
+    }
     .pin-tabs{
       display:flex;
       gap: 8px;
