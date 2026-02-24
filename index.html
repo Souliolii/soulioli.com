@@ -11,7 +11,7 @@ title: Home
       <p>A running log of things I'm building, learning, testing, and trying to understand.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/archive">Browse Archive</a>
-        <a id="home-about-trigger" class="btn btn-highlight" href="/about">About</a>
+        <button id="home-about-trigger" class="btn btn-highlight" type="button">About</button>
         <a class="btn btn-highlight" href="https://github.com/Souliolii/soulioli.com">Repo</a>
       </div>
     </div>
@@ -114,7 +114,6 @@ title: Home
       <p>If it is useful to anyone else, great. If not, it still works as my long-term memory.</p>
       <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
         <button id="home-about-back" class="pill" type="button">Back to Home Feed</button>
-        <a class="pill" href="/about">Open Full About Page</a>
       </div>
     </div>
   </div>
@@ -155,19 +154,20 @@ title: Home
     function showAboutPanel() {
       grid.classList.add("is-hidden");
       setTimeout(function () {
+        grid.classList.add("is-collapsed");
         panel.classList.add("is-visible");
-      }, 140);
+      }, 260);
     }
 
     function showMainGrid() {
       panel.classList.remove("is-visible");
       setTimeout(function () {
+        grid.classList.remove("is-collapsed");
         grid.classList.remove("is-hidden");
-      }, 140);
+      }, 260);
     }
 
-    trigger.addEventListener("click", function (e) {
-      e.preventDefault();
+    trigger.addEventListener("click", function () {
       showAboutPanel();
     });
 
