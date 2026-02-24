@@ -79,6 +79,13 @@
       gap: 12px;
       flex-wrap:wrap;
     }
+    .brand-logo{
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      object-fit: contain;
+      display:block;
+    }
     .brand .name{
       font-weight: 700;
       font-size: 1.1rem;
@@ -285,6 +292,9 @@
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
+        {% if site.logo %}
+          <img class="brand-logo" src="{{ site.logo | relative_url }}" alt="{{ site.title | default: 'Site' }} logo" />
+        {% endif %}
         <div class="name">soulioli.com</div>
         <div class="tag">notes on building, systems, ideas, and games</div>
       </div>

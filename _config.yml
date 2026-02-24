@@ -1,6 +1,7 @@
 title: Soulioli
 description: Personal notes, projects, and reminders.
 url: "https://soulioli.com"
+logo: "/assets/logo.png"
 
 # Makes URLs nice like /first-log-entry/ instead of /2026/02/24/...
 permalink: /:title/
