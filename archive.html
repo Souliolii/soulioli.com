@@ -1,0 +1,25 @@
+---
+layout: default
+title: Archive
+---
+
+<div class="hero">
+  <h1>Archive</h1>
+  <p>Everything I’ve posted — newest first.</p>
+</div>
+
+<div class="card">
+  <div class="bd">
+    {% for post in site.posts %}
+      <div style="padding: 12px 0; border-bottom:1px solid var(--border);">
+        <div class="post-title" style="margin:0;">
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </div>
+        <div class="meta">
+          <span>{{ post.date | date: "%b %d, %Y" }}</span>
+          {% if post.tags %}<span>•</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
