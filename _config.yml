@@ -3,6 +3,10 @@ description: Personal notes, projects, and reminders.
 url: "https://soulioli.com"
 hero_logo: "/assets/logo.png"
 favicon: "/assets/logo.png"
+social:
+  github: "https://github.com/Souliolii/soulioli.com"
+  discord: "https://discord.com"
+  reddit: "https://reddit.com"
 
 # Homepage pinned-post sections (tag-driven).
 # Use tag: all to include all pinned posts.

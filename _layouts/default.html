@@ -90,6 +90,67 @@
         --btn-highlight-border: rgba(45, 127, 206, 0.35); /* Hover/active border */
       }
     }
+    body[data-theme="light"]{
+      --bg: #f6f3ec;
+      --bg-accent-a: rgba(70, 108, 178, 0.09);
+      --bg-accent-b: rgba(112, 95, 67, 0.07);
+      --panel: #fbfaf6;
+      --panel-2: #f3eee4;
+      --panel-soft: rgba(0, 0, 0, 0.015);
+      --heading-bg: #f3eee4;
+      --text: #1f1e1a;
+      --muted: #5f5b52;
+      --faint: #8a8376;
+      --border: #d8d0c2;
+      --link: #1c4f86;
+      --brand-a: #2d7fce;
+      --brand-b: #7a56bf;
+      --topbar-bg: rgba(255, 255, 255, 0.75);
+      --card-gradient-top: rgba(0, 0, 0, 0.02);
+      --tile-gradient-a: rgba(45, 127, 206, 0.08);
+      --tile-gradient-b: rgba(122, 86, 191, 0.04);
+      --hero-glow-core: rgba(255, 255, 255, 0.7);
+      --hero-glow-a: rgba(45, 127, 206, 0.25);
+      --hero-glow-b: rgba(122, 86, 191, 0.22);
+      --logo-shadow: rgba(80, 110, 170, 0.35);
+      --play-icon: rgba(255, 255, 255, 0.95);
+      --card-shadow: rgba(10, 10, 10, 0.10);
+      --btn-primary-a: #5ba7f2;
+      --btn-primary-b: #7992ec;
+      --btn-primary-text: #0f1220;
+      --btn-neutral-bg: rgba(0, 0, 0, 0.06);
+      --btn-highlight-bg: rgba(45, 127, 206, 0.12);
+      --btn-highlight-border: rgba(45, 127, 206, 0.35);
+    }
+    body[data-theme="amoled"]{
+      --bg: #000000;
+      --bg-accent-a: rgba(255, 76, 166, 0.16);
+      --bg-accent-b: rgba(255, 158, 214, 0.10);
+      --panel: #060307;
+      --panel-2: #100712;
+      --panel-soft: rgba(255, 179, 222, 0.06);
+      --heading-bg: rgba(255, 179, 222, 0.03);
+      --text: #ffeaf7;
+      --muted: #cf9cbe;
+      --faint: #9a6d8c;
+      --border: rgba(255, 157, 214, 0.20);
+      --link: #ff86c8;
+      --brand-a: #ff5bb1;
+      --brand-b: #ffb3de;
+      --topbar-bg: rgba(7, 3, 8, 0.94);
+      --card-gradient-top: rgba(255, 179, 222, 0.05);
+      --hero-glow-core: rgba(255, 227, 245, 0.18);
+      --hero-glow-a: rgba(255, 92, 174, 0.36);
+      --hero-glow-b: rgba(255, 168, 223, 0.26);
+      --logo-shadow: rgba(255, 138, 206, 0.48);
+      --card-shadow: rgba(0, 0, 0, 0.46);
+      --btn-primary-a: #ff62b7;
+      --btn-primary-b: #ff8fd0;
+      --btn-primary-text: #230616;
+      --btn-neutral-bg: rgba(255, 179, 222, 0.08);
+      --btn-highlight-bg: rgba(255, 107, 187, 0.14);
+      --btn-highlight-border: rgba(255, 139, 206, 0.52);
+    }
 
     *{ box-sizing:border-box; }
     body{
@@ -110,7 +171,7 @@
     .topbar{
       display:flex;
       align-items:center;
-      justify-content:flex-start;
+      justify-content:space-between;
       gap: 14px;
       padding: 10px 14px;
       border: 1px solid var(--border);
@@ -134,6 +195,72 @@
       color: var(--muted);
       font-size: .88rem;
       letter-spacing: .2px;
+    }
+    .top-tools{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      position: relative;
+    }
+    .icon-btn{
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      color: var(--muted);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      cursor: pointer;
+    }
+    .icon-btn:hover{
+      color: var(--text);
+      border-color: var(--btn-highlight-border);
+      background: var(--btn-highlight-bg);
+      text-decoration:none;
+    }
+    .icon-btn svg{
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+    .theme-menu{
+      position:absolute;
+      right: 0;
+      top: 42px;
+      min-width: 170px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      box-shadow: 0 12px 26px var(--card-shadow);
+      padding: 6px;
+      display:none;
+      z-index: 30;
+    }
+    .theme-menu.is-open{ display:block; }
+    .theme-option{
+      width:100%;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      text-align:left;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      font-size:.9rem;
+    }
+    .theme-option:hover{
+      background: var(--panel-soft);
+      color: var(--text);
+    }
+    .theme-option.is-active{
+      color: var(--text);
+      background: var(--btn-highlight-bg);
     }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
@@ -168,16 +295,6 @@
     }
     @media (min-width: 900px){
       .hero-split{ grid-template-columns: 1fr 420px; }
-    }
-    .eyebrow{
-      display:inline-block;
-      margin-bottom: 10px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: var(--panel-2);
-      color: var(--muted);
-      font-size: .85rem;
-      font-weight: 700;
     }
     .brand-gradient{
       background: linear-gradient(90deg, var(--brand-a) 0%, var(--brand-b) 100%);
@@ -355,32 +472,6 @@
     }
     .pin-panel{ display:none; }
     .pin-panel.is-active{ display:block; }
-    .tile-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    @media (min-width: 700px){
-      .tile-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    .tile{
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: linear-gradient(140deg, var(--tile-gradient-a), var(--tile-gradient-b)), var(--panel-2);
-      padding: 12px;
-    }
-    .tile h3{
-      margin: 0 0 5px;
-      font-size: 1rem;
-      line-height: 1.25;
-    }
-    .tile p{
-      margin: 0;
-      color: var(--muted);
-      font-size: .92rem;
-      line-height: 1.45;
-    }
-
     .footer{
       margin-top: 24px;
       color: var(--faint);
@@ -399,7 +490,26 @@
     <div class="topbar">
       <div class="brand">
         <div class="name">soulioli.com</div>
-        <div class="tag">notes on building, systems, ideas, and games</div>
+        <div class="tag">a public archive, from a personal vault.</div>
+      </div>
+      <div class="top-tools">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Theme menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V4.5a.75.75 0 0 1 .75-.75Zm0 14.25a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5a.75.75 0 0 1 .75-.75ZM5.636 6.697a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 1 1-1.06 1.061L5.635 7.758a.75.75 0 0 1 0-1.06Zm10.607 10.607a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.06ZM3.75 12a.75.75 0 0 1 .75-.75H6a.75.75 0 0 1 0 1.5H4.5A.75.75 0 0 1 3.75 12Zm14.25 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 18 12ZM6.697 18.364a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.061 1.06l-1.06 1.061a.75.75 0 0 1-1.06 0ZM17.304 5.636a.75.75 0 0 1 0 1.06l-1.061 1.061a.75.75 0 1 1-1.06-1.06l1.06-1.061a.75.75 0 0 1 1.06 0ZM12 8.25A3.75 3.75 0 1 0 12 15.75 3.75 3.75 0 0 0 12 8.25Z"/></svg>
+        </button>
+        <div id="theme-menu" class="theme-menu" role="menu" aria-label="Theme options">
+          <button class="theme-option" data-theme-option="light" type="button">Light <span>L</span></button>
+          <button class="theme-option" data-theme-option="dark" type="button">Dark <span>D</span></button>
+          <button class="theme-option" data-theme-option="amoled" type="button">AMOLED <span>A</span></button>
+        </div>
+        <a class="icon-btn" href="{{ site.social.github }}" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.3c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.5 0 0 1.1-.4 3.6 1.3a12 12 0 0 1 6.5 0c2.5-1.7 3.6-1.3 3.6-1.3.7 1.8.2 3.2.1 3.5.8.9 1.3 2 1.3 3.4 0 4.7-2.9 5.8-5.7 6.1.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a class="icon-btn" href="{{ site.social.discord }}" target="_blank" rel="noopener" aria-label="Discord">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A16.8 16.8 0 0 0 16.2 3l-.2.5a11.5 11.5 0 0 1 3.4 1.6 12.9 12.9 0 0 0-4.1-1.3 13.5 13.5 0 0 0-6.6 0A12.9 12.9 0 0 0 4.6 5a11.5 11.5 0 0 1 3.4-1.6L7.8 3a16.8 16.8 0 0 0-4.1 1.4C1.2 8 0.6 11.5 0.8 15a16.8 16.8 0 0 0 5 2.5l1.1-1.8c-.6-.2-1.2-.5-1.8-.8l.4-.3c3.4 1.6 7.1 1.6 10.4 0l.4.3c-.6.3-1.2.6-1.8.8l1.1 1.8a16.8 16.8 0 0 0 5-2.5c.3-4-.6-7.5-2.9-10.6ZM8.7 13.2c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
+        </a>
+        <a class="icon-btn" href="{{ site.social.reddit }}" target="_blank" rel="noopener" aria-label="Reddit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a2.4 2.4 0 0 0-4.1-1.7 10 10 0 0 0-6.4-2.1l1.1-3.4 3 0a1.8 1.8 0 1 0 0-1.2h-3.4a.6.6 0 0 0-.6.4l-1.3 4.2a10 10 0 0 0-6.2 2.1A2.4 2.4 0 1 0 4.2 14v.3C4.2 17.5 7.8 20 12 20s7.8-2.5 7.8-5.7V14A2.4 2.4 0 0 0 24 12ZM8.9 13.8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Zm6.2 3.3a4.6 4.6 0 0 1-6.2 0 .6.6 0 0 1 .8-.9 3.3 3.3 0 0 0 4.6 0 .6.6 0 1 1 .8.9Zm0-3.3a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z"/></svg>
+        </a>
       </div>
     </div>
 
@@ -409,5 +519,50 @@
       <div>(c) {{ "now" | date: "%Y" }} Soulioli</div>
     </div>
   </div>
+  <script>
+    (function () {
+      var root = document.body;
+      var toggle = document.getElementById("theme-toggle");
+      var menu = document.getElementById("theme-menu");
+      var options = document.querySelectorAll("[data-theme-option]");
+      if (!toggle || !menu || !options.length) return;
+
+      var savedTheme = localStorage.getItem("theme_mode");
+      if (savedTheme) root.setAttribute("data-theme", savedTheme);
+
+      function refreshActive(theme) {
+        options.forEach(function (opt) {
+          var active = opt.getAttribute("data-theme-option") === theme;
+          opt.classList.toggle("is-active", active);
+        });
+      }
+
+      function currentTheme() {
+        return root.getAttribute("data-theme") || "dark";
+      }
+
+      refreshActive(currentTheme());
+
+      toggle.addEventListener("click", function () {
+        menu.classList.toggle("is-open");
+      });
+
+      options.forEach(function (opt) {
+        opt.addEventListener("click", function () {
+          var theme = opt.getAttribute("data-theme-option");
+          root.setAttribute("data-theme", theme);
+          localStorage.setItem("theme_mode", theme);
+          refreshActive(theme);
+          menu.classList.remove("is-open");
+        });
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+          menu.classList.remove("is-open");
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
