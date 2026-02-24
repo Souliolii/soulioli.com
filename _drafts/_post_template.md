@@ -1,3 +1,4 @@
+YYYY-MM-DD-title.md
 ---
 layout: post
 title: ""
