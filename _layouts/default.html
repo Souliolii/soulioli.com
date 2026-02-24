@@ -4,140 +4,146 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% if page.title %}{{ page.title }} - {% endif %}Soulioli</title>
-  <meta name="color-scheme" content="dark light" />
   <style>
     :root{
-      --bg: #0b0d12;
-      --panel: rgba(255,255,255,.04);
-      --panel2: rgba(255,255,255,.06);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.62);
-      --faint: rgba(255,255,255,.38);
-      --border: rgba(255,255,255,.10);
-      --link: #8ab4ff;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 16px;
-      --max: 920px;
+      --bg: #f6f3ec;
+      --panel: #fbfaf6;
+      --text: #1f1e1a;
+      --muted: #5f5b52;
+      --faint: #8a8376;
+      --border: #d8d0c2;
+      --link: #1c4f86;
+      --max: 880px;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
     body{
       margin:0;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(138,180,255,.18), transparent 55%),
-                  radial-gradient(900px 700px at 90% 10%, rgba(176,99,255,.14), transparent 55%),
-                  var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      line-height: 1.65;
-      letter-spacing: .2px;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
     }
 
     a{ color: var(--link); text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 32px 18px 56px; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 18px 18px 46px; }
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 14px;
-      padding: 14px 16px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 8px 0 14px;
+      border-bottom: 1px solid var(--border);
     }
     .brand{
-      display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+      display:flex;
+      align-items:baseline;
+      gap: 12px;
+      flex-wrap:wrap;
     }
-    .brand .name{ font-weight: 800; letter-spacing:.6px; }
-    .brand .tag{ color: var(--muted); font-size: .95rem; }
-    .nav{ display:flex; gap: 10px; flex-wrap:wrap; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      border-radius: 999px;
+    .brand .name{
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: .2px;
       color: var(--text);
+    }
+    .brand .tag{
+      color: var(--muted);
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      font-size: .88rem;
+      letter-spacing: .2px;
+    }
+    .nav{
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
       font-size: .95rem;
     }
-    .pill:hover{ background: rgba(255,255,255,.06); text-decoration:none; }
+    .nav a{ color: var(--muted); }
+    .nav a:hover{ color: var(--text); }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 4px;
+      color: var(--muted);
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      font-size: .88rem;
+    }
+    .pill:hover{ text-decoration:none; color: var(--text); }
 
     .hero{
-      margin: 22px 0 18px;
-      padding: 24px 22px;
-      border-radius: calc(var(--radius) + 6px);
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      margin: 26px 0 8px;
+      padding: 0;
     }
     .hero h1{
       margin: 0 0 6px;
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-      letter-spacing: .2px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.15;
     }
-    .hero p{ margin: 0; color: var(--muted); max-width: 70ch; }
+    .hero p{ margin: 0; color: var(--muted); max-width: 75ch; }
 
     .grid{
       display:grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 22px;
       margin-top: 16px;
     }
-    @media (min-width: 860px){
-      .grid{ grid-template-columns: 1.2fr .8fr; gap: 14px; }
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1.28fr .72fr; }
     }
 
     .card{
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      background: var(--panel);
     }
     .card .hd{
-      padding: 14px 16px;
+      padding: 10px 14px;
       border-bottom: 1px solid var(--border);
-      background: rgba(0,0,0,.16);
+      background: #f3eee4;
       color: var(--muted);
-      font-size: .9rem;
-      letter-spacing: .4px;
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      font-size: .82rem;
+      letter-spacing: .5px;
       text-transform: uppercase;
     }
-    .card .bd{ padding: 14px 16px; }
+    .card .bd{ padding: 14px; }
 
     .post-item{
-      padding: 14px 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      border-radius: 14px;
-      transition: transform .08s ease, background .12s ease;
-    }
-    .post-item:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.05);
+      display:block;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
     }
     .post-title{
-      margin: 0 0 4px;
-      font-size: 1.15rem;
-      font-weight: 750;
+      margin: 0 0 2px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
     }
     .meta{
       color: var(--muted);
-      font-size: .95rem;
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      font-size: .84rem;
       display:flex; gap: 10px; flex-wrap:wrap;
     }
-    .excerpt{ margin: 10px 0 0; color: var(--faint); }
+    .excerpt{ margin: 6px 0 0; color: var(--faint); font-size: .98rem; }
 
     .footer{
-      margin-top: 22px;
+      margin-top: 24px;
       color: var(--faint);
-      font-size: .95rem;
+      font-size: .88rem;
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
       display:flex;
       justify-content:space-between;
       gap: 12px;
       flex-wrap:wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
     }
   </style>
 </head>
@@ -146,12 +152,12 @@
     <div class="topbar">
       <div class="brand">
         <div class="name">soulioli.com</div>
-        <div class="tag">logbook - projects - reminders</div>
+        <div class="tag">notes on building, systems, ideas, and games</div>
       </div>
       <div class="nav">
-        <a class="pill" href="/">Home</a>
-        <a class="pill" href="/archive">Archive</a>
-        <a class="pill" href="/about">About</a>
+        <a href="/">Home</a>
+        <a href="/archive">Archive</a>
+        <a href="/about">About</a>
       </div>
     </div>
 
