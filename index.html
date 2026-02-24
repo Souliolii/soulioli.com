@@ -11,7 +11,7 @@ title: Home
       <p>A running log of things I'm building, learning, testing, and trying to understand.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/archive">Browse Archive</a>
-        <a class="btn btn-highlight" href="/about">About</a>
+        <a id="home-about-trigger" class="btn btn-highlight" href="/about">About</a>
         <a class="btn btn-highlight" href="https://github.com/Souliolii/soulioli.com">Repo</a>
       </div>
     </div>
@@ -23,7 +23,7 @@ title: Home
   </div>
 </div>
 
-<div class="grid">
+<div id="home-main-grid" class="grid home-grid">
   <div class="card">
     <div class="hd">Latest entries</div>
     <div class="bd">
@@ -105,6 +105,21 @@ title: Home
   </div>
 </div>
 
+<div id="home-about-panel" class="home-about-panel">
+  <div class="card">
+    <div class="hd">About This Site</div>
+    <div class="bd">
+      <p style="margin-top:0;color:var(--muted);">This is my personal archive for notes, projects, experiments, and things worth saving.</p>
+      <p>I started this as a simple logbook, but it is now a broader home for my interests: software, systems, web projects, game notes, and everything in between.</p>
+      <p>If it is useful to anyone else, great. If not, it still works as my long-term memory.</p>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="home-about-back" class="pill" type="button">Back to Home Feed</button>
+        <a class="pill" href="/about">Open Full About Page</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   (function () {
     var tabs = document.querySelectorAll("[data-pin-target]");
@@ -127,6 +142,37 @@ title: Home
       tab.addEventListener("click", function () {
         setActive(tab.getAttribute("data-pin-target"));
       });
+    });
+  })();
+
+  (function () {
+    var trigger = document.getElementById("home-about-trigger");
+    var back = document.getElementById("home-about-back");
+    var grid = document.getElementById("home-main-grid");
+    var panel = document.getElementById("home-about-panel");
+    if (!trigger || !back || !grid || !panel) return;
+
+    function showAboutPanel() {
+      grid.classList.add("is-hidden");
+      setTimeout(function () {
+        panel.classList.add("is-visible");
+      }, 140);
+    }
+
+    function showMainGrid() {
+      panel.classList.remove("is-visible");
+      setTimeout(function () {
+        grid.classList.remove("is-hidden");
+      }, 140);
+    }
+
+    trigger.addEventListener("click", function (e) {
+      e.preventDefault();
+      showAboutPanel();
+    });
+
+    back.addEventListener("click", function () {
+      showMainGrid();
     });
   })();
 </script>

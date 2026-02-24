@@ -277,6 +277,28 @@
       text-transform: uppercase;
     }
     .card .bd{ padding: 14px 16px; }
+    .home-grid{
+      transition: opacity .26s ease, transform .26s ease;
+    }
+    .home-grid.is-hidden{
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+    .home-about-panel{
+      margin-top: 22px;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity .26s ease, transform .26s ease;
+      display: none;
+    }
+    .home-about-panel.is-visible{
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
 
     .post-item{
       display:block;
