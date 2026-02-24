@@ -12,7 +12,8 @@ title: Home
   <div class="card">
     <div class="hd">Latest entries</div>
     <div class="bd">
-      {% for post in site.posts limit: 8 %}
+      {% assign sorted_posts = site.posts | sort: "date" | reverse %}
+      {% for post in sorted_posts limit: 8 %}
         <a class="post-item" href="{{ post.url }}" style="display:block; margin-bottom:12px;">
           <div class="post-title">{{ post.title }}</div>
           <div class="meta">

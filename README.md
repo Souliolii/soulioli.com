@@ -21,3 +21,4 @@ Push to `main`. GitHub Pages builds and deploys from this repository.
 - Use `_drafts/_post_template.md` as a starting point.
 - Move finished posts to `_posts/` with filename format:
   `YYYY-MM-DD-title.md`
+- Set `date` with time and timezone (example: `2026-02-24 10:00:00 -0500`) so ordering is deterministic.

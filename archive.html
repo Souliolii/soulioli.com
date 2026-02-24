@@ -10,7 +10,8 @@ title: Archive
 
 <div class="card">
   <div class="bd">
-    {% for post in site.posts %}
+    {% assign sorted_posts = site.posts | sort: "date" | reverse %}
+    {% for post in sorted_posts %}
       <div style="padding: 12px 0; border-bottom:1px solid var(--border);">
         <div class="post-title" style="margin:0;">
           <a href="{{ post.url }}">{{ post.title }}</a>
