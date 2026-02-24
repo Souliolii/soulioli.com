@@ -5,82 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% if page.title %}{{ page.title }} - {% endif %}Soulioli</title>
   <meta name="color-scheme" content="dark light" />
+  {% assign tab_icon = site.favicon | default: site.hero_logo %}
+  {% if tab_icon %}
+    <link rel="icon" type="image/png" href="{{ tab_icon | relative_url }}" />
+    <link rel="apple-touch-icon" href="{{ tab_icon | relative_url }}" />
+  {% endif %}
   <style>
     /* Theme tokens: edit these values to quickly reskin the whole site */
+    /* Start here (most impactful): --bg, --panel, --text, --muted, --link, --btn-primary-a/b */
     :root{
       /* Core palette */
-      --bg: #111317;
-      --bg-accent-a: rgba(70, 145, 255, 0.22);
-      --bg-accent-b: rgba(190, 116, 255, 0.16);
-      --panel: #181b24;
-      --panel-2: #1c2030;
-      --panel-soft: rgba(255, 255, 255, 0.035);
-      --heading-bg: rgba(255, 255, 255, 0.02);
-      --text: #f4f7ff;
-      --muted: #b1b8c9;
-      --faint: #838da3;
-      --border: rgba(255, 255, 255, 0.10);
-      --link: #8dc0ff;
-      --brand-a: #76c7ff;
-      --brand-b: #c5a1ff;
+      --bg: #09070b; /* Main page background color */
+      --bg-accent-a: rgba(255, 76, 166, 0.22); /* Big background glow (hot pink) */
+      --bg-accent-b: rgba(255, 158, 214, 0.16); /* Big background glow (light pink) */
+      --panel: #151018; /* Card/surface base color */
+      --panel-2: #201426; /* Secondary surface shade (chips/badges) */
+      --panel-soft: rgba(255, 179, 222, 0.08); /* Soft fill for pills/tabs/buttons */
+      --heading-bg: rgba(255, 179, 222, 0.05); /* Card header strip background */
+      --text: #ffeaf7; /* Main text color */
+      --muted: #d3a6c6; /* Secondary/meta text color */
+      --faint: #a87e9c; /* Tertiary text (excerpts/less emphasis) */
+      --border: rgba(255, 157, 214, 0.24); /* Borders around cards/buttons/tabs */
+      --link: #ff7cc3; /* Link color */
+      --brand-a: #ff5bb1; /* Hero title gradient start */
+      --brand-b: #ffb3de; /* Hero title gradient end */
 
       /* Surface and effect tokens */
-      --topbar-bg: rgba(17, 20, 27, 0.75);
-      --card-gradient-top: rgba(255, 255, 255, 0.02);
-      --tile-gradient-a: rgba(118, 199, 255, 0.08);
-      --tile-gradient-b: rgba(197, 161, 255, 0.04);
-      --hero-glow-core: rgba(255, 255, 255, 0.18);
-      --hero-glow-a: rgba(112, 201, 255, 0.44);
-      --hero-glow-b: rgba(196, 138, 255, 0.40);
-      --logo-shadow: rgba(145, 200, 255, 0.45);
-      --play-icon: rgba(255, 255, 255, 0.95);
-      --card-shadow: rgba(0, 0, 0, 0.24);
+      --topbar-bg: rgba(20, 12, 22, 0.84); /* Header bar background */
+      --card-gradient-top: rgba(255, 179, 222, 0.06); /* Subtle card top glow */
+      --tile-gradient-a: rgba(255, 92, 174, 0.14); /* Optional tile gradient start */
+      --tile-gradient-b: rgba(255, 168, 223, 0.08); /* Optional tile gradient end */
+      --hero-glow-core: rgba(255, 227, 245, 0.26); /* Hero image center glow */
+      --hero-glow-a: rgba(255, 92, 174, 0.50); /* Hero glow pink ring */
+      --hero-glow-b: rgba(255, 168, 223, 0.40); /* Hero glow light pink ring */
+      --logo-shadow: rgba(255, 138, 206, 0.55); /* Glow around hero logo */
+      --play-icon: rgba(255, 234, 247, 0.96); /* Fallback play icon color */
+      --card-shadow: rgba(0, 0, 0, 0.36); /* Card drop shadow */
 
       /* Button tokens */
-      --btn-primary-a: #67b7ff;
-      --btn-primary-b: #7f9cff;
-      --btn-primary-text: #12131a;
-      --btn-neutral-bg: rgba(255, 255, 255, 0.10);
-      --btn-highlight-bg: rgba(141, 192, 255, 0.14);
-      --btn-highlight-border: rgba(141, 192, 255, 0.5);
+      --btn-primary-a: #ff62b7; /* Primary button gradient start */
+      --btn-primary-b: #ff8fd0; /* Primary button gradient end */
+      --btn-primary-text: #230616; /* Text on primary button */
+      --btn-neutral-bg: rgba(255, 179, 222, 0.10); /* Secondary button background */
+      --btn-highlight-bg: rgba(255, 107, 187, 0.18); /* Hover bg for About/Repo/tab active */
+      --btn-highlight-border: rgba(255, 139, 206, 0.60); /* Hover/active border */
 
-      --max: 1180px;
-      --radius: 14px;
+      --max: 1180px; /* Max content width */
+      --radius: 14px; /* Standard corner radius */
     }
 
     /* Optional light mode fallback for users who force light preference */
     @media (prefers-color-scheme: light){
       :root{
-        --bg: #f6f3ec;
-        --bg-accent-a: rgba(70, 108, 178, 0.09);
-        --bg-accent-b: rgba(112, 95, 67, 0.07);
-        --panel: #fbfaf6;
-        --panel-2: #f3eee4;
-        --panel-soft: rgba(0, 0, 0, 0.015);
-        --heading-bg: #f3eee4;
-        --text: #1f1e1a;
-        --muted: #5f5b52;
-        --faint: #8a8376;
-        --border: #d8d0c2;
-        --link: #1c4f86;
-        --brand-a: #2d7fce;
-        --brand-b: #7a56bf;
-        --topbar-bg: rgba(255, 255, 255, 0.75);
-        --card-gradient-top: rgba(0, 0, 0, 0.02);
-        --tile-gradient-a: rgba(45, 127, 206, 0.08);
-        --tile-gradient-b: rgba(122, 86, 191, 0.04);
-        --hero-glow-core: rgba(255, 255, 255, 0.7);
-        --hero-glow-a: rgba(45, 127, 206, 0.25);
-        --hero-glow-b: rgba(122, 86, 191, 0.22);
-        --logo-shadow: rgba(80, 110, 170, 0.35);
-        --play-icon: rgba(255, 255, 255, 0.95);
-        --card-shadow: rgba(10, 10, 10, 0.10);
-        --btn-primary-a: #5ba7f2;
-        --btn-primary-b: #7992ec;
-        --btn-primary-text: #0f1220;
-        --btn-neutral-bg: rgba(0, 0, 0, 0.06);
-        --btn-highlight-bg: rgba(45, 127, 206, 0.12);
-        --btn-highlight-border: rgba(45, 127, 206, 0.35);
+        --bg: #f6f3ec; /* Main page background color */
+        --bg-accent-a: rgba(70, 108, 178, 0.09); /* Big background glow (blue) */
+        --bg-accent-b: rgba(112, 95, 67, 0.07); /* Big background glow (warm) */
+        --panel: #fbfaf6; /* Card/surface base color */
+        --panel-2: #f3eee4; /* Secondary surface shade (chips/badges) */
+        --panel-soft: rgba(0, 0, 0, 0.015); /* Soft fill for pills/tabs/buttons */
+        --heading-bg: #f3eee4; /* Card header strip background */
+        --text: #1f1e1a; /* Main text color */
+        --muted: #5f5b52; /* Secondary/meta text color */
+        --faint: #8a8376; /* Tertiary text (excerpts/less emphasis) */
+        --border: #d8d0c2; /* Borders around cards/buttons/tabs */
+        --link: #1c4f86; /* Link color */
+        --brand-a: #2d7fce; /* Hero title gradient start */
+        --brand-b: #7a56bf; /* Hero title gradient end */
+        --topbar-bg: rgba(255, 255, 255, 0.75); /* Header bar background */
+        --card-gradient-top: rgba(0, 0, 0, 0.02); /* Subtle card top glow */
+        --tile-gradient-a: rgba(45, 127, 206, 0.08); /* Optional tile gradient start */
+        --tile-gradient-b: rgba(122, 86, 191, 0.04); /* Optional tile gradient end */
+        --hero-glow-core: rgba(255, 255, 255, 0.7); /* Hero image center glow */
+        --hero-glow-a: rgba(45, 127, 206, 0.25); /* Hero glow blue ring */
+        --hero-glow-b: rgba(122, 86, 191, 0.22); /* Hero glow purple ring */
+        --logo-shadow: rgba(80, 110, 170, 0.35); /* Glow around hero logo */
+        --play-icon: rgba(255, 255, 255, 0.95); /* Fallback play icon color */
+        --card-shadow: rgba(10, 10, 10, 0.10); /* Card drop shadow */
+        --btn-primary-a: #5ba7f2; /* Primary button gradient start */
+        --btn-primary-b: #7992ec; /* Primary button gradient end */
+        --btn-primary-text: #0f1220; /* Text on primary button */
+        --btn-neutral-bg: rgba(0, 0, 0, 0.06); /* Secondary button background */
+        --btn-highlight-bg: rgba(45, 127, 206, 0.12); /* Hover bg for About/Repo/tab active */
+        --btn-highlight-border: rgba(45, 127, 206, 0.35); /* Hover/active border */
       }
     }
 
@@ -103,7 +109,7 @@
     .topbar{
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-start;
       gap: 14px;
       padding: 10px 14px;
       border: 1px solid var(--border);
@@ -128,15 +134,6 @@
       font-size: .88rem;
       letter-spacing: .2px;
     }
-    .nav{
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
-      font-size: .95rem;
-    }
-    .nav a{ color: var(--muted); }
-    .nav a:hover{ color: var(--text); }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding: 7px 12px;
@@ -397,9 +394,6 @@
       <div class="brand">
         <div class="name">soulioli.com</div>
         <div class="tag">notes on building, systems, ideas, and games</div>
-      </div>
-      <div class="nav">
-        <a href="/">Home</a>
       </div>
     </div>
 

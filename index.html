@@ -6,7 +6,6 @@ title: Home
 <div class="hero hero-home">
   <div class="hero-split">
     <div>
-      <div class="eyebrow">Latest update</div>
       <h1><span class="brand-gradient">soulioli archive</span></h1>
       <p>A running log of things I'm building, learning, testing, and trying to understand.</p>
       <div class="hero-actions">
@@ -38,9 +37,6 @@ title: Home
           {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
         </a>
       {% endfor %}
-      <div style="margin-top:10px;">
-        <a class="pill" href="/archive">View all posts</a>
-      </div>
     </div>
   </div>
 
@@ -98,9 +94,6 @@ title: Home
         <p style="margin-top:0;color:var(--muted);">No pinned posts yet.</p>
         <p style="margin-top:8px;color:var(--faint);">Add <code>pinned: true</code> to a post's front matter to pin it here.</p>
       {% endif %}
-      <div style="margin-top:12px;">
-        <a class="pill" href="/archive">Browse full archive</a>
-      </div>
     </div>
   </div>
 </div>
