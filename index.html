@@ -15,7 +15,11 @@ title: Home
         <a class="btn" href="https://github.com/Souliolii/soulioli.com">Source</a>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true"></div>
+    <div class="hero-visual{% unless site.hero_logo %} is-fallback{% endunless %}" aria-hidden="true">
+      {% if site.hero_logo %}
+        <img class="hero-visual-logo" src="{{ site.hero_logo | relative_url }}" alt="" />
+      {% endif %}
+    </div>
   </div>
 </div>
 
