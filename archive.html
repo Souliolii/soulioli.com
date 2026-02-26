@@ -20,7 +20,8 @@ title: Archive
   </div>
 </div>
 
-<div class="card">
+<div class="grid archive-grid">
+<div class="card archive-card">
   <div class="bd">
     {% assign sorted_posts = site.posts | sort: "date" | reverse %}
     {% if site.pinned_sections and site.pinned_sections.size > 0 %}
@@ -71,6 +72,7 @@ title: Archive
       </div>
     {% endif %}
   </div>
+</div>
 </div>
 
 <script>
