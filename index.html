@@ -10,8 +10,6 @@ title: Home
       <p>a running log of things i find noteworthy.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/archive">Browse Archive</a>
-        <button id="home-about-trigger" class="btn btn-highlight" type="button">About</button>
-        <a class="btn btn-highlight" href="https://github.com/Souliolii/soulioli.com">Repo</a>
       </div>
     </div>
     <div class="hero-visual{% unless site.hero_logo %} is-fallback{% endunless %}" aria-hidden="true">
@@ -142,11 +140,11 @@ title: Home
   })();
 
   (function () {
-    var trigger = document.getElementById("home-about-trigger");
     var back = document.getElementById("home-about-back");
     var grid = document.getElementById("home-main-grid");
     var panel = document.getElementById("home-about-panel");
-    if (!trigger || !back || !grid || !panel) return;
+    if (!back || !grid || !panel) return;
+    var ABOUT_HASH = "#about";
 
     function showAboutPanel() {
       grid.classList.add("is-hidden");
@@ -164,11 +162,19 @@ title: Home
       }, 260);
     }
 
-    trigger.addEventListener("click", function () {
-      showAboutPanel();
-    });
+    function applyFromHash() {
+      if (window.location.hash === ABOUT_HASH) {
+        showAboutPanel();
+      } else {
+        showMainGrid();
+      }
+    }
+
+    applyFromHash();
+    window.addEventListener("hashchange", applyFromHash);
 
     back.addEventListener("click", function () {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
       showMainGrid();
     });
   })();
