@@ -49,7 +49,7 @@ title: Home
           <div class="pin-tabs" role="tablist" aria-label="Pinned post sections">
             {% for section in site.pinned_sections %}
               <button class="pin-tab{% if forloop.first %} is-active{% endif %}" type="button" data-pin-target="{{ section.id }}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
-                {% if section.id == "game" %}Games{% else %}{{ section.label }}{% endif %}
+                {{ section.label }}
               </button>
             {% endfor %}
           </div>

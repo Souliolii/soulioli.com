@@ -59,9 +59,6 @@ pinned_sections:
   - id: all
     label: All
     tag: all
-  - id: build
-    label: Build
-    tag: build
   - id: guides
     label: Guides
     tag: guide
@@ -69,7 +66,7 @@ pinned_sections:
     label: Notes
     tag: note
   - id: game
-    label: Game
+    label: Games
     tag: game
 ```
 
@@ -119,9 +116,20 @@ Internal links (`/...`) stay in the same tab.
    - Pinned section tabs switch.
 2. Archive page:
    - Tag tabs switch.
-   - Back to Home button works.
+   - Post list scrolls inside the card (page itself should stay stable).
 3. Post page:
    - Shows date + timestamp.
 4. Header tools:
    - Theme menu opens above hero image.
+   - Home icon appears on non-home pages.
+   - About icon appears on home page only.
+   - Dividers between nav/social icon groups render correctly.
    - Social icons open correct links.
+
+## Private notes (recommended)
+
+Keep personal/internal notes in:
+
+- `OWNER_NOTES.local.md` (already git-ignored in `.gitignore`)
+
+Avoid putting private operational details in `README.md`, since README is typically public-facing.
