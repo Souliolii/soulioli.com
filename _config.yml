@@ -14,9 +14,6 @@ pinned_sections:
   - id: all
     label: All
     tag: all
-  - id: build
-    label: Build
-    tag: build
   - id: guides
     label: Guides
     tag: guide
@@ -24,7 +21,7 @@ pinned_sections:
     label: Notes
     tag: note
   - id: game
-    label: Game
+    label: Games
     tag: game
 
 # Makes URLs nice like /first-log-entry/ instead of /2026/02/24/...
