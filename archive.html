@@ -19,7 +19,7 @@ title: Archive
       </div>
 
       {% for section in site.pinned_sections %}
-        <div class="pin-panel{% if forloop.first %} is-active{% endif %}" data-archive-panel="{{ section.id }}" role="tabpanel">
+        <div class="pin-panel archive-scroll{% if forloop.first %} is-active{% endif %}" data-archive-panel="{{ section.id }}" role="tabpanel">
           {% if section.tag == "all" %}
             {% assign section_posts = sorted_posts %}
           {% else %}
@@ -44,7 +44,7 @@ title: Archive
         </div>
       {% endfor %}
     {% else %}
-      <div class="pin-panel is-active" data-archive-panel="all" role="tabpanel">
+      <div class="pin-panel archive-scroll is-active" data-archive-panel="all" role="tabpanel">
         {% for post in sorted_posts %}
           <div class="post-item" style="padding: 12px 0;">
             <div class="post-title" style="margin:0 0 3px;">
@@ -59,10 +59,6 @@ title: Archive
       </div>
     {% endif %}
   </div>
-</div>
-
-<div style="margin-top:14px;">
-  <a class="pill" href="/">&larr; Back to Home</a>
 </div>
 
 <script>
