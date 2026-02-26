@@ -31,7 +31,7 @@ title: Home
             <div class="post-title">{{ post.title }}</div>
             <div class="meta">
               <span>{{ post.date | date: "%b %d, %Y %I:%M %p" }}</span>
-              {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " | replace: "game", "games" }}</span>{% endif %}
+              {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
             </div>
             {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
           </a>
@@ -68,7 +68,7 @@ title: Home
                     <div class="post-title">{{ post.title }}</div>
                     <div class="meta">
                       <span>{{ post.date | date: "%b %d, %Y %I:%M %p" }}</span>
-                      {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " | replace: "game", "games" }}</span>{% endif %}
+                      {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
                     </div>
                     {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
                   </a>
@@ -85,7 +85,7 @@ title: Home
               <div class="post-title">{{ post.title }}</div>
               <div class="meta">
                 <span>{{ post.date | date: "%b %d, %Y %I:%M %p" }}</span>
-                {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " | replace: "game", "games" }}</span>{% endif %}
+                {% if post.tags %}<span>|</span><span>{{ post.tags | join: ", " }}</span>{% endif %}
               </div>
               {% if post.excerpt %}<div class="excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
             </a>
