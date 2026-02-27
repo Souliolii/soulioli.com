@@ -82,3 +82,55 @@ git push
 3. Normalize pin order (if pinned changed)
 4. Run pre-push check
 5. Commit and push
+
+
+
+
+
+
+
+
+
+
+
+# Owner Notes (Local / Private)
+
+This file is gitignored and should stay local-only.
+
+## Fast post template
+
+```yaml
+---
+layout: post
+title: "Post title"
+date: 2026-02-24 15:00:00 -0500
+tags: [note]
+pinned: false
+pin_order:
+---
+```
+
+## Common edits
+
+- New post:
+  - Add file to `_posts/` with `YYYY-MM-DD-title.md`
+- Pin a post:
+  - `pinned: true`
+  - Optional `pin_order: 1`
+- Change tab sections:
+  - Edit `pinned_sections` in `_config.yml`
+- Change social links:
+  - Edit `social` in `_config.yml`
+- Change colors:
+  - Edit `:root` tokens in `_layouts/default.html`
+
+## Gotchas
+
+- Future dates do not show until that date/time.
+- Use one tag per post (current setup expectation).
+- Keep filenames lowercase with hyphens.
+
+## Local run
+
+- `bundle exec jekyll serve`
+- Open `http://127.0.0.1:4000`
