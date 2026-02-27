@@ -43,7 +43,7 @@ while (Test-Path -LiteralPath $path) {
 $content = @(
   '---',
   'layout: post',
-  "title: \"$Title\"",
+  ('title: "' + $Title + '"'),
   "tags: [$tagValue]",
   '---',
   '',

@@ -54,7 +54,7 @@ $dateValue = Get-JekyllDateNow
 $frontMatter = @(
   '---',
   'layout: post',
-  "title: \"$Title\"",
+  ('title: "' + $Title + '"'),
   "date: $dateValue",
   "tags: [$tagValue]"
 )
