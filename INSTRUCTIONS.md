@@ -1,12 +1,23 @@
-# Publishing Instructions
+# Site Operations Instructions
 
-Run all commands from:
+Run commands from:
 
 `e:\GitHub\soulioli.com`
 
-Use VS Code terminal (`Ctrl + ``) and PowerShell.
+Use PowerShell in VS Code terminal.
 
-## 1) Create a New Post
+## Local Development
+
+```powershell
+bundle install
+bundle exec jekyll serve
+```
+
+Open:
+
+`http://127.0.0.1:4000`
+
+## Create a New Post
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/new-post.ps1 -Title "My Post Title" -Tag note
@@ -17,32 +28,27 @@ Allowed tags:
 - `note`
 - `game`
 
-## 2) Create a Draft
+Post files are created in `_posts/`.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/new-draft.ps1 -Title "My Draft Title" -Tag guide
+## Post Front Matter (Reference)
+
+```yaml
+---
+layout: post
+title: "My Post Title"
+date: 2026-02-24 15:00:00 -0500
+tags: [note]
+pinned: false
+---
 ```
 
-Draft file goes into `_drafts/`.
+Rules:
+- Use exactly one tag per post.
+- If `date` is in the future, the post will not appear until that time.
 
-## 3) Promote Draft to Published Post
+## Pinned Post Management
 
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/promote-draft.ps1 -Name my-draft-title
-```
-
-Notes:
-- Use the draft filename without `.md`.
-- This moves the file from `_drafts/` to `_posts/`.
-- It sets `date:` to now.
-
-Keep existing draft date instead:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/promote-draft.ps1 -Name my-draft-title -KeepDate
-```
-
-## 4) Normalize Pinned Post Order (If You Changed Pinned Posts)
+To normalize `pin_order` for pinned posts:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/normalize-pin-order.ps1
@@ -53,21 +59,23 @@ Pin ranges:
 - `note` => `200-299`
 - `game` => `300-399`
 
-## 5) Run Pre-Push Validation (Always)
+## Pre-Push Validation
+
+Always run before pushing:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-push-check.ps1
 ```
 
-Checks:
-- future dates
-- tag validity vs `_config.yml`
+Validation checks:
+- future-dated posts
+- valid tags from `_config.yml`
 - single-tag rule
-- pinned posts have `pin_order`
+- pinned posts include `pin_order`
 - duplicate `pin_order`
-- `pin_order` is in the correct tag range
+- `pin_order` range compliance by tag
 
-## 6) Commit and Push
+## Publish
 
 ```powershell
 git add .
@@ -75,62 +83,9 @@ git commit -m "your update message"
 git push
 ```
 
-## Quick Daily Flow
+## Quick Workflow
 
-1. Create post or draft
-2. Promote draft (if needed)
-3. Normalize pin order (if pinned changed)
-4. Run pre-push check
-5. Commit and push
-
-
-
-
-
-
-
-
-
-
-
-# Owner Notes (Local / Private)
-
-This file is gitignored and should stay local-only.
-
-## Fast post template
-
-```yaml
----
-layout: post
-title: "Post title"
-date: 2026-02-24 15:00:00 -0500
-tags: [note]
-pinned: false
-pin_order:
----
-```
-
-## Common edits
-
-- New post:
-  - Add file to `_posts/` with `YYYY-MM-DD-title.md`
-- Pin a post:
-  - `pinned: true`
-  - Optional `pin_order: 1`
-- Change tab sections:
-  - Edit `pinned_sections` in `_config.yml`
-- Change social links:
-  - Edit `social` in `_config.yml`
-- Change colors:
-  - Edit `:root` tokens in `_layouts/default.html`
-
-## Gotchas
-
-- Future dates do not show until that date/time.
-- Use one tag per post (current setup expectation).
-- Keep filenames lowercase with hyphens.
-
-## Local run
-
-- `bundle exec jekyll serve`
-- Open `http://127.0.0.1:4000`
+1. Create post
+2. Normalize pin order (if pinned posts changed)
+3. Run pre-push check
+4. Commit and push
