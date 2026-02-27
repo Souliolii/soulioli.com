@@ -38,6 +38,12 @@ Important:
 - `tags` should be single-tag in your current setup.
 - If `date` is in the future, the post will not show by default.
 
+Shortcut command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/new-post.ps1 -Title "My Post Title" -Tag note
+```
+
 ## Pin a post on Home
 
 Add to post front matter:
@@ -49,6 +55,34 @@ pin_order: 1
 
 - `pinned: true` shows it in `Pinned Posts`.
 - `pin_order` is optional and sorts pinned posts (lower first).
+
+Pin management policy:
+- `guide` posts use `100-199`
+- `note` posts use `200-299`
+- `game` posts use `300-399`
+
+Auto-normalize command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/normalize-pin-order.ps1
+```
+
+## Draft workflow
+
+Create a draft:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/new-draft.ps1 -Title "Draft Title" -Tag guide
+```
+
+Promote draft to `_posts` with today's date:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/promote-draft.ps1 -Name draft-title
+```
+
+Optional:
+- pass `-KeepDate` to preserve an existing `date:` value in the draft.
 
 ## Pinned section tabs (Home + Archive)
 
@@ -125,6 +159,22 @@ Internal links (`/...`) stay in the same tab.
    - About icon appears on home page only.
    - Dividers between nav/social icon groups render correctly.
    - Social icons open correct links.
+
+## Pre-push validation
+
+Run this before pushing:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/pre-push-check.ps1
+```
+
+It checks:
+- future-dated posts
+- tag validity against `_config.yml`
+- single-tag rule
+- pinned posts have `pin_order`
+- unique `pin_order`
+- `pin_order` is in the correct tag range
 
 ## Private notes (recommended)
 
