@@ -2,8 +2,10 @@
 This repo contains a simple static website scaffold for `soulioli.com`.
 
 ## What was created
-- `index.html` — the main page
+- `index.html` — the main page with an OSRS profit calculator UI
 - `styles.css` — the site styles
+- `app.js` — live Runescape pricing and profit logic
+- `favicon.svg` — browser tab logo
 - `CNAME` — optional GitHub Pages custom domain file
 
 ## Next steps

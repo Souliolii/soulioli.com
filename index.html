@@ -15,24 +15,50 @@
         <p>developer, creator, and lifelong tinkerer. this is the home for my projects, ideas, and links.</p>
       </header>
 
+      <section class="calculator-card">
+        <div class="calculator-intro">
+          <h2>OSRS Craft Profit Calculator</h2>
+          <p>Enter the item IDs and quantities you use as ingredients, then compare their buy-now cost against the crafted item's instant sell value.</p>
+        </div>
+
+        <div class="calculator-form">
+          <div class="form-group">
+            <label>
+              Crafted item ID
+              <input id="output-id" type="number" min="1" placeholder="e.g. 676" />
+            </label>
+            <label>
+              Output quantity
+              <input id="output-qty" type="number" min="1" value="1" />
+            </label>
+          </div>
+
+          <div id="materials"></div>
+
+          <div class="calculator-actions">
+            <button id="add-material" type="button">Add ingredient</button>
+            <button id="calculate-profit" type="button">Calculate profit</button>
+          </div>
+
+          <div id="calculator-message" class="calculator-message info">Enter your item IDs, then click calculate.</div>
+        </div>
+
+        <div id="calculator-result" class="calculator-result"></div>
+      </section>
+
       <section class="cards">
         <article>
-          <h2>about</h2>
-          <p>Simple, fast, and ready to deploy. Replace this text with your own introduction and goals.</p>
+          <h2>About</h2>
+          <p>Use the calculator above to test RuneScape crafting profits. The engine checks live item prices from the OSRS wiki price API.</p>
         </article>
 
         <article>
-          <h2>links</h2>
+          <h2>Links</h2>
           <ul>
             <li><a href="#">GitHub</a></li>
             <li><a href="#">Twitter</a></li>
             <li><a href="#">Email</a></li>
           </ul>
-        </article>
-
-        <article>
-          <h2>status</h2>
-          <p>This website is scaffolded locally. Deploy it to your host and point your domain to the published site.</p>
         </article>
       </section>
 
@@ -40,5 +66,6 @@
         Built for <strong>soulioli.com</strong>. Edit these files and deploy wherever you want.
       </footer>
     </div>
+    <script src="app.js"></script>
   </body>
 </html>
