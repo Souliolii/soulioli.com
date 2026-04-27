@@ -18,15 +18,21 @@
       <section class="calculator-card">
         <div class="calculator-intro">
           <h2>OSRS Craft Profit Calculator</h2>
-          <p>Enter the item IDs and quantities you use as ingredients, then compare their buy-now cost against the crafted item's instant sell value.</p>
+          <p>Search items by name, pick ingredients with icons, and compare their cost against the crafted item's sell value.</p>
         </div>
 
         <div class="calculator-form">
           <div class="form-group">
-            <label>
-              Crafted item ID
-              <input id="output-id" type="number" min="1" placeholder="e.g. 676" />
-            </label>
+            <div class="search-wrap">
+              <label>
+                Crafted item
+                <input id="output-search" type="search" class="item-search" placeholder="Search item by name or paste ID" autocomplete="off" />
+              </label>
+              <span class="item-preview" id="output-preview"></span>
+              <ul class="search-suggestions"></ul>
+              <input id="output-id" type="hidden" />
+            </div>
+
             <label>
               Output quantity
               <input id="output-qty" type="number" min="1" value="1" />
@@ -40,7 +46,7 @@
             <button id="calculate-profit" type="button">Calculate profit</button>
           </div>
 
-          <div id="calculator-message" class="calculator-message info">Enter your item IDs, then click calculate.</div>
+          <div id="calculator-message" class="calculator-message info">Search items above and click calculate when ready.</div>
         </div>
 
         <div id="calculator-result" class="calculator-result"></div>
@@ -49,7 +55,7 @@
       <section class="cards">
         <article>
           <h2>About</h2>
-          <p>Use the calculator above to test RuneScape crafting profits. The engine checks live item prices from the OSRS wiki price API.</p>
+          <p>Use the calculator above to test RuneScape crafting profits. The engine checks live item prices from the OSRS wiki price API and shows icons for selected items.</p>
         </article>
 
         <article>

@@ -4,9 +4,14 @@ This repo contains a simple static website scaffold for `soulioli.com`.
 ## What was created
 - `index.html` — the main page with an OSRS profit calculator UI
 - `styles.css` — the site styles
-- `app.js` — live Runescape pricing and profit logic
+- `app.js` — live Runescape pricing, name search, and icon support
 - `favicon.svg` — browser tab logo
 - `CNAME` — optional GitHub Pages custom domain file
+
+## Notes on item search
+- Craft and ingredient fields now support searching by item name instead of raw IDs.
+- Item selections show a small OSRS wiki icon and name for each chosen item.
+- The calculator still uses live prices from the OSRS wiki price API.
 
 ## Next steps
 1. Open `index.html` and edit the text, headings, and links.
