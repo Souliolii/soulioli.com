@@ -137,39 +137,33 @@ const fetchPrices = async (ids) => {
     const json = await response.json();
     const data = json.data || {};
 
-    const missingIds = uncachedIds.filter((id) => !data[id]);
-    if (missingIds.length > 0) {
-      const missingNames = missingIds.map(formatItemLabel).join(', ');
-      throw new Error(`No live price data found for ${missingNames}. Some items may not currently be traded on the Grand Exchange.`);
-    }
-
     uncachedIds.forEach((id) => {
-      priceCache.set(id, data[id]);
+      priceCache.set(id, data[id] || null);
     });
   }
 
-  const priceMap = uniqueIds.reduce((map, id) => {
-    map[id] = priceCache.get(id);
+  return uniqueIds.reduce((map, id) => {
+    const price = priceCache.get(id);
+    if (price && price.high != null && price.low != null) {
+      map[id] = { ...price, source: 'live' };
+    } else {
+      const item = itemById.get(id);
+      if (item?.value != null) {
+        map[id] = { high: item.value, low: item.value, source: 'fallback' };
+      } else {
+        map[id] = null;
+      }
+    }
     return map;
   }, {});
-
-  const invalidValues = uniqueIds.filter((id) => {
-    const price = priceMap[id];
-    return !price || price.high == null || price.low == null;
-  });
-
-  if (invalidValues.length > 0) {
-    const invalidNames = invalidValues.map(formatItemLabel).join(', ');
-    throw new Error(`Live price values are unavailable for ${invalidNames}. Some items may not currently have GE trade history.`);
-  }
-
-  return priceMap;
 };
 
-const buildMaterialRow = ({ id, name, qty, high, subtotal }) => {
+const buildMaterialRow = ({ id, name, qty, high, subtotal, source }) => {
+  const label = name || formatItemName(id);
+  const note = source === 'fallback' ? ' <small class="fallback-note">(estimated)</small>' : '';
   return `
     <div class="detail-row">
-      <div>${name || formatItemName(id)}</div>
+      <div>${label}${note}</div>
       <div>${qty}</div>
       <div>${formatGp(high)}</div>
       <div>${formatGp(subtotal)}</div>
@@ -207,6 +201,11 @@ const calculateProfit = async () => {
 
   try {
     const priceMap = await fetchPrices(allIds);
+    const missingItems = allIds.filter((id) => !priceMap[id]);
+    if (missingItems.length > 0) {
+      const missingNames = missingItems.map(formatItemLabel).join(', ');
+      throw new Error(`Could not resolve price data for ${missingNames}.`);
+    }
 
     let totalCost = 0;
     const materialDetails = materials.map((material) => {
@@ -217,6 +216,7 @@ const calculateProfit = async () => {
         ...material,
         high: price.high,
         subtotal,
+        source: price.source,
       };
     });
 
@@ -225,6 +225,11 @@ const calculateProfit = async () => {
     const profit = revenue - totalCost;
     const roi = totalCost ? ((profit / totalCost) * 100).toFixed(1) : '0.0';
     const outputName = formatItemName(outputItemId);
+
+    const fallbackUsed = allIds.some((id) => priceMap[id].source === 'fallback');
+    const fallbackNote = fallbackUsed
+      ? '<div class="calculator-message info">Some values are estimated using default item value because live GE prices were unavailable.</div>'
+      : '';
 
     const resultElement = document.querySelector('#calculator-result');
     resultElement.innerHTML = `
@@ -244,6 +249,7 @@ const calculateProfit = async () => {
         <div class="result-label">ROI</div>
         <div>${profit >= 0 ? roi : 'N/A'}%</div>
       </div>
+      ${fallbackNote}
       <div class="material-summary">
         <h3>Material costs</h3>
         <div class="detail-row header">
