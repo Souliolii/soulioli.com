@@ -3,11 +3,21 @@ const mappingApi = 'https://prices.runescape.wiki/api/v1/osrs/mapping';
 const iconBase = 'https://oldschool.runescape.wiki/images/';
 
 let itemCatalog = [];
+let itemSearchIndex = [];
 const itemById = new Map();
+const priceCache = new Map();
 
 const formatGp = (value) => `${Number(value).toLocaleString()} gp`;
 
 const normalize = (value) => String(value).trim().toLowerCase();
+
+const debounce = (callback, delay = 120) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback(...args), delay);
+  };
+};
 
 const createMaterialRow = () => {
   const row = document.createElement('div');
@@ -37,12 +47,20 @@ const showMessage = (text, type = 'info') => {
   output.className = `calculator-message ${type}`;
 };
 
+// The OSRS prices API exposes a single /mapping endpoint but no dedicated search route.
+// Load the mapping once and reuse the local item index for search suggestions.
 const fetchMapping = async () => {
   try {
     const response = await fetch(mappingApi);
     if (!response.ok) throw new Error('Unable to load item data.');
     itemCatalog = await response.json();
-    itemCatalog.forEach((item) => itemById.set(String(item.id), item));
+    itemCatalog.forEach((item) => {
+      itemById.set(String(item.id), item);
+      itemSearchIndex.push({
+        ...item,
+        nameLower: item.name.toLowerCase(),
+      });
+    });
   } catch (error) {
     showMessage('Could not load item search data. Item search will be disabled.', 'error');
   }
@@ -55,8 +73,8 @@ const getMatches = (query) => {
   if (exactId) return [exactId];
 
   const substring = normalizedQuery.replace(/[^a-z0-9 ]/g, '');
-  return itemCatalog
-    .filter((item) => item.name.toLowerCase().includes(substring) || String(item.id) === substring)
+  return itemSearchIndex
+    .filter((item) => item.nameLower.includes(substring) || String(item.id) === substring)
     .slice(0, 10);
 };
 
@@ -80,18 +98,21 @@ const clearSuggestions = (searchWrap) => {
 };
 
 const setSelectedItem = (searchWrap, item) => {
-  const searchInput = searchWrap.querySelector('.item-search');
-  const itemIdInput = searchWrap.querySelector('.item-id');
+  const searchInput = searchWrap.querySelector('input[type="search"]');
+  const hiddenIdInput = searchWrap.querySelector('input[type="hidden"]');
   const preview = searchWrap.querySelector('.item-preview');
 
+  if (!searchInput || !hiddenIdInput || !preview) return;
+
   searchInput.value = item.name;
-  itemIdInput.value = item.id;
+  hiddenIdInput.value = item.id;
   preview.innerHTML = `
     <img src="${getImageUrl(item.icon)}" alt="${item.name}" />
     <span>${item.name}</span>
   `;
   clearSuggestions(searchWrap);
 };
+
 
 const fetchPrice = async (itemId) => {
   const response = await fetch(`${priceApiBase}${encodeURIComponent(itemId)}`);
@@ -109,6 +130,35 @@ const fetchPrice = async (itemId) => {
 const formatItemName = (id) => {
   const item = itemById.get(String(id));
   return item ? `${item.name} (#${id})` : `#${id}`;
+};
+
+const fetchPrices = async (ids) => {
+  const uniqueIds = [...new Set(ids.filter(Boolean).map(String))];
+  const uncachedIds = uniqueIds.filter((id) => !priceCache.has(id));
+
+  if (uncachedIds.length > 0) {
+    const response = await fetch(`${priceApiBase}${uncachedIds.map(encodeURIComponent).join(',')}`);
+    if (!response.ok) {
+      throw new Error('Failed to load prices from the API.');
+    }
+
+    const json = await response.json();
+    const data = json.data || {};
+
+    const missingIds = uncachedIds.filter((id) => !data[id]);
+    if (missingIds.length > 0) {
+      throw new Error(`No price data found for item${missingIds.length > 1 ? 's' : ''} ${missingIds.join(', ')}.`);
+    }
+
+    uncachedIds.forEach((id) => {
+      priceCache.set(id, data[id]);
+    });
+  }
+
+  return uniqueIds.reduce((map, id) => {
+    map[id] = priceCache.get(id);
+    return map;
+  }, {});
 };
 
 const buildMaterialRow = ({ id, name, qty, high, subtotal }) => {
@@ -151,11 +201,7 @@ const calculateProfit = async () => {
   const allIds = [...new Set(materials.map((item) => item.id).concat(outputItemId))];
 
   try {
-    const priceResults = await Promise.all(allIds.map((id) => fetchPrice(id)));
-    const priceMap = allIds.reduce((map, id, index) => {
-      map[id] = priceResults[index];
-      return map;
-    }, {});
+    const priceMap = await fetchPrices(allIds);
 
     let totalCost = 0;
     const materialDetails = materials.map((material) => {
@@ -256,9 +302,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     showMessage('Added a new ingredient row.', 'info');
   });
 
-  materials.addEventListener('input', handleSearchInput);
+  const debouncedSearch = debounce(handleSearchInput, 100);
 
-  document.querySelector('#output-search').addEventListener('input', handleSearchInput);
+  materials.addEventListener('input', debouncedSearch);
+
+  document.querySelector('#output-search').addEventListener('input', debouncedSearch);
   document.querySelector('#output-search').addEventListener('click', handleSearchInput);
 
   document.addEventListener('click', handleGlobalClick);
