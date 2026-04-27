@@ -114,22 +114,14 @@ const setSelectedItem = (searchWrap, item) => {
 };
 
 
-const fetchPrice = async (itemId) => {
-  const response = await fetch(`${priceApiBase}${encodeURIComponent(itemId)}`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch price for item ${itemId}.`);
-  }
-  const json = await response.json();
-  const entry = json.data?.[itemId];
-  if (!entry) {
-    throw new Error(`No price data found for item ${itemId}.`);
-  }
-  return entry;
-};
-
 const formatItemName = (id) => {
   const item = itemById.get(String(id));
   return item ? `${item.name} (#${id})` : `#${id}`;
+};
+
+const formatItemLabel = (id) => {
+  const item = itemById.get(String(id));
+  return item ? `${item.name} (${id})` : `#${id}`;
 };
 
 const fetchPrices = async (ids) => {
@@ -147,7 +139,8 @@ const fetchPrices = async (ids) => {
 
     const missingIds = uncachedIds.filter((id) => !data[id]);
     if (missingIds.length > 0) {
-      throw new Error(`No price data found for item${missingIds.length > 1 ? 's' : ''} ${missingIds.join(', ')}.`);
+      const missingNames = missingIds.map(formatItemLabel).join(', ');
+      throw new Error(`No live price data found for ${missingNames}. Some items may not currently be traded on the Grand Exchange.`);
     }
 
     uncachedIds.forEach((id) => {
@@ -155,10 +148,22 @@ const fetchPrices = async (ids) => {
     });
   }
 
-  return uniqueIds.reduce((map, id) => {
+  const priceMap = uniqueIds.reduce((map, id) => {
     map[id] = priceCache.get(id);
     return map;
   }, {});
+
+  const invalidValues = uniqueIds.filter((id) => {
+    const price = priceMap[id];
+    return !price || price.high == null || price.low == null;
+  });
+
+  if (invalidValues.length > 0) {
+    const invalidNames = invalidValues.map(formatItemLabel).join(', ');
+    throw new Error(`Live price values are unavailable for ${invalidNames}. Some items may not currently have GE trade history.`);
+  }
+
+  return priceMap;
 };
 
 const buildMaterialRow = ({ id, name, qty, high, subtotal }) => {

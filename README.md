@@ -14,6 +14,7 @@ This repo contains a simple static website scaffold for `soulioli.com`.
 - The calculator still uses live prices from the OSRS wiki price API.
 - The API does not provide a dedicated item search route, so item names are indexed locally after a one-time mapping fetch.
 - Prices are fetched in batches for the selected item set, and repeated quotes during the same session reuse cached results when available.
+- Some craft or ingredient items may not have live Grand Exchange price data, and the calculator will now report that more clearly.
 
 ## Next steps
 1. Open `index.html` and edit the text, headings, and links.
