@@ -8,12 +8,15 @@ echo ========================================
 echo.
 echo To stop the service:
 echo.
-echo 1. Go to the ngrok window (the one showing the URL)
+echo 1. Go to the Cloudflare Tunnel window
+
 echo 2. Press Ctrl + C
+
 echo 3. Wait for it to close
 echo.
 echo 4. Go to the Node server window (the one showing "running at...")
 echo 5. Press Ctrl + C
+
 echo 6. Wait for it to close
 echo.
 echo ========================================

@@ -1,6 +1,5 @@
 @echo off
-REM This script starts the Document Share service
-REM It will open two terminals: one for the server, one for ngrok
+REM This script starts the Document Share service using Cloudflare Tunnel
 
 echo.
 echo ========================================
@@ -9,33 +8,30 @@ echo ========================================
 echo.
 echo This will open TWO windows:
 echo   1. Node server (keeps running)
-echo   2. ngrok tunnel (for friend access)
+echo   2. Cloudflare Tunnel (soulioli.com)
 echo.
 echo Press any key to continue...
 pause
 
 REM Start the Node server in a new window
 echo Starting Node server...
-start cmd /k "cd /d e:\Github\soulioli.com && npm start"
+start "" cmd /k "cd /d %~dp0 && npm start"
 
 REM Give it a moment to start
 timeout /t 2 /nobreak
 
-REM Start ngrok in another new window
-echo Starting ngrok tunnel...
-start cmd /k "ngrok http 3000"
+echo Starting Cloudflare Tunnel...
+start "" cmd /k "cd /d %~dp0 && cloudflared tunnel run soulioli-tunnel"
 
 echo.
 echo ========================================
 echo Both services are starting!
 echo.
 echo Server window: http://localhost:3000
+echo Tunnel window: will serve https://soulioli.com
+
+echo Keep both windows open while the tunnel is running.
 echo.
-echo In the ngrok window, look for the line:
-echo   Forwarding: https://xxxxx.ngrok.io
-echo.
-echo Copy that URL and share it with friends.
-echo.
-echo To STOP: Press Ctrl+C in each window
+echo To STOP: close each window or press Ctrl+C in each window
 echo ========================================
 echo.

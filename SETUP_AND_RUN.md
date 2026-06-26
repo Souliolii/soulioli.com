@@ -19,24 +19,21 @@ You should see a version number like `v20.x.x`. If you see an error, restart you
 
 ---
 
-### Step 2: Install ngrok (for sharing with friends)
+### Step 2: Install Cloudflare Tunnel (`cloudflared`)
 
-1. Go to `https://ngrok.com/`
-2. Click **Sign Up** (create a free account)
-3. After signing in, go to the **Download** page
-4. Download the **Windows** zip file
-5. Unzip it to a simple folder like `C:\ngrok`
-6. In PowerShell, add ngrok to your system PATH:
+1. Go to the Cloudflare installation page:
+   `https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/`
+2. Download and install `cloudflared` for Windows.
+3. Open PowerShell and verify the install:
+   ```powershell
+   cloudflared --version
    ```
-   $ngrokPath = "C:\ngrok"
-   $env:Path += ";$ngrokPath"
+4. Authenticate with Cloudflare if needed:
+   ```powershell
+   cloudflared login
    ```
 
-**To verify:** Open PowerShell and type:
-```
-ngrok --version
-```
-You should see a version number. If you see an error, restart PowerShell and try again.
+**To verify:** the command should open a browser and ask you to sign in to Cloudflare.
 
 ---
 
@@ -59,55 +56,49 @@ You should see a version number. If you see an error, restart PowerShell and try
 
 ## PART 2: START THE SERVICE (Do this when you want it running)
 
-### Step 1: Start the Node server
+### Step 1: Start the app and tunnel
 
 1. Open PowerShell
 2. Go to the project folder:
-   ```
+   ```powershell
    cd e:\Github\soulioli.com
    ```
-3. Start the server:
+3. Run the startup script:
+   ```powershell
+   START_SERVICE.bat
    ```
-   npm start
+4. This will open two windows:
+   - Node server
+   - Cloudflare Tunnel
+
+5. Keep both windows open while the tunnel is running.
+
+### Step 2: Confirm the site is available
+
+1. Open your browser and visit:
    ```
-4. You should see:
+   https://soulioli.com
    ```
-   Document Share server running at http://localhost:3000
-   ```
-   **Leave this window open.** Do not close it.
+2. If the page does not load immediately, wait a few seconds, refresh, and try again.
 
 ---
 
-### Step 2: Start ngrok (to give friends access)
+### Step 3: Share your domain with friends
 
-1. Open a **new PowerShell window** (don't close the first one)
-2. Start ngrok:
-   ```
-   ngrok http 3000
-   ```
-3. You'll see a screen like this:
-   ```
-   ngrok by @inconshreveable
-   ...
-   Session Status:           online
-   Account:                  [your email]
-   Version:                  X.X.X
-   Region:                   us (United States)
-   Forwarding:               https://[random-id].ngrok.io -> http://localhost:3000
-   ```
+Send your friends this URL:
+- `https://soulioli.com`
 
-4. Copy the URL that starts with `https://` (the random one like `https://abc123xyz.ngrok.io`)
+They can now visit the site, upload documents, and download files.
 
----
+Send your friends this URL:
+- `https://soulioli.com`
 
-### Step 3: Share the link with friends
-
-Send your friends the ngrok URL. They can now:
+They can now:
 - Visit the site
 - Upload documents
 - Download documents
 
-**Important:** The link only works while BOTH terminals are running (the Node server AND ngrok).
+**Important:** The site only works while BOTH windows are running (the Node server AND Cloudflare Tunnel).
 
 ---
 
@@ -117,7 +108,7 @@ Send your friends the ngrok URL. They can now:
 1. Go to `http://localhost:3000` in your browser
 
 ### For your friends:
-1. Use the ngrok URL you shared (looks like `https://abc123xyz.ngrok.io`)
+1. Go to `https://soulioli.com`
 
 ### How to upload a file:
 1. Enter a title (e.g., "Budget Spreadsheet")
@@ -135,9 +126,9 @@ Send your friends the ngrok URL. They can now:
 
 ## PART 4: STOP THE SERVICE (When you want to shut it down)
 
-### Step 1: Stop ngrok
+### Step 1: Stop the Cloudflare Tunnel
 
-1. Go to the ngrok PowerShell window (the second one you opened)
+1. Go to the Cloudflare Tunnel PowerShell window
 2. Press `Ctrl + C`
 3. The window will close or show `[CTRL-C]`
 
@@ -145,7 +136,7 @@ Send your friends the ngrok URL. They can now:
 
 ### Step 2: Stop the Node server
 
-1. Go to the other PowerShell window (the first one with npm start)
+1. Go to the other PowerShell window (the one with npm start)
 2. Press `Ctrl + C`
 3. The window will close or show an exit message
 
@@ -153,7 +144,7 @@ Send your friends the ngrok URL. They can now:
 
 ### Step 3: Verify it's stopped
 
-- Friends trying to use the ngrok URL will get an error
+- `https://soulioli.com` will no longer connect
 - Your PC will no longer be serving the site
 - Files are **still saved** in `e:\Github\soulioli.com\uploads\`
 
@@ -166,10 +157,9 @@ Send your friends the ngrok URL. They can now:
 - Restart your computer
 - Download and install Node.js again from `nodejs.org`
 
-### "ngrok not found"
-- You didn't install ngrok or add it to PATH
-- Download ngrok and unzip it to `C:\ngrok`
-- Then add to PATH (see Setup Step 2)
+### "cloudflared not found"
+- You didn't install Cloudflare Tunnel or it is not in your PATH
+- Reinstall `cloudflared` and restart PowerShell
 
 ### "Address already in use" error
 - Something else is using port 3000
@@ -177,10 +167,10 @@ Send your friends the ngrok URL. They can now:
 - Wait 10 seconds
 - Try again
 
-### My friend can't access the link
-- Make sure BOTH terminals are still running (Node server + ngrok)
-- Check that they're using the full URL with `https://`
-- Restart ngrok to get a new URL
+### My friend can't access the site
+- Make sure BOTH windows are still running (Node server + Cloudflare Tunnel)
+- Check that they're using the URL `https://soulioli.com`
+- Restart the tunnel if needed
 
 ### I want to upload a new file
 - Keep everything running
@@ -207,8 +197,8 @@ ngrok http 3000
 ```
 
 **To stop everything:**
-- Press `Ctrl + C` in Terminal 2
-- Press `Ctrl + C` in Terminal 1
+- Press `Ctrl + C` in the Cloudflare Tunnel window
+- Press `Ctrl + C` in the Node server window
 
 **Files are saved in:**
 ```
@@ -217,7 +207,7 @@ e:\Github\soulioli.com\uploads\
 
 **Your friends use:**
 ```
-https://[the-url-from-ngrok]
+https://soulioli.com
 ```
 
 ---
