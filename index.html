@@ -27,6 +27,11 @@
           </label>
 
           <label>
+            Category
+            <input id="category" name="category" type="text" placeholder="e.g., Work, Personal, Projects" />
+          </label>
+
+          <label>
             Description
             <textarea id="description" name="description" rows="3" placeholder="Describe the file for your friends"></textarea>
           </label>
@@ -47,6 +52,10 @@
         <div class="list-header">
           <h2>Available documents</h2>
           <p>Friends can download the files below. New uploads appear automatically after a successful upload.</p>
+        </div>
+
+        <div class="search-box">
+          <input id="search-input" type="text" placeholder="Search by title, description, or category..." />
         </div>
 
         <div id="file-list" class="file-list"></div>

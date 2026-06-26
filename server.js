@@ -6,6 +6,7 @@ const fs = require('fs/promises');
 const app = express();
 const uploadsDir = path.join(__dirname, 'uploads');
 const metadataPath = path.join(uploadsDir, 'metadata.json');
+const deletePassword = process.env.DELETE_PASSWORD || 'delete123';
 
 const storage = multer.diskStorage({
   destination: uploadsDir,
@@ -60,12 +61,14 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 
     const title = String(req.body.title || req.file.originalname).trim();
     const description = String(req.body.description || '').trim();
+    const category = String(req.body.category || 'Uncategorized').trim();
     const metadata = await readMetadata();
 
     const fileRecord = {
       id: `${Date.now()}`,
       title: title || req.file.originalname,
       description,
+      category: category || 'Uncategorized',
       originalName: req.file.originalname,
       filename: req.file.filename,
       size: req.file.size,
@@ -79,6 +82,35 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Upload failed.' });
+  }
+});
+
+app.delete('/api/files/:id', async (req, res) => {
+  try {
+    const providedPassword = req.body.password || '';
+    
+    if (providedPassword !== deletePassword) {
+      return res.status(403).json({ error: 'Incorrect password. File not deleted.' });
+    }
+
+    const fileId = req.params.id;
+    const metadata = await readMetadata();
+    const fileToDelete = metadata.find((f) => f.id === fileId);
+
+    if (!fileToDelete) {
+      return res.status(404).json({ error: 'File not found.' });
+    }
+
+    const filePath = path.join(uploadsDir, fileToDelete.filename);
+    await fs.unlink(filePath);
+
+    const updatedMetadata = metadata.filter((f) => f.id !== fileId);
+    await writeMetadata(updatedMetadata);
+
+    res.json({ success: true, message: 'File deleted.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Delete failed.' });
   }
 });
 
