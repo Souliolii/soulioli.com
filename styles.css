@@ -185,6 +185,17 @@ button:hover {
   gap: 0.75rem;
 }
 
+/* Video preview inside file cards */
+.video-preview {
+  margin-top: 0.75rem;
+}
+.video-preview video {
+  width: 100%;
+  max-height: 360px;
+  border-radius: 10px;
+  background: #000;
+}
+
 .file-card-title {
   font-size: 1.1rem;
   font-weight: 700;

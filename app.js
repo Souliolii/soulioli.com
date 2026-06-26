@@ -19,6 +19,8 @@ const showFeedback = (message, type = 'success') => {
 
 const renderFileCard = (file) => {
   const downloadUrl = `/uploads/${encodeURIComponent(file.filename)}`;
+  const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(file.originalName || file.filename);
+
   return `
     <article class="file-card">
       <div class="file-card-body">
@@ -28,7 +30,13 @@ const renderFileCard = (file) => {
           <span>${new Date(file.uploadedAt).toLocaleString()}</span>
           <span>${formatBytes(file.size)}</span>
         </div>
-        <p>${file.description || 'No description provided.'}</p>
+        ${isVideo ? `
+          <div class="video-preview">
+            <video controls preload="metadata" src="${downloadUrl}"></video>
+          </div>
+        ` : `
+          <p>${file.description || 'No description provided.'}</p>
+        `}
       </div>
       <div class="file-card-actions">
         <a class="download-button" href="${downloadUrl}" download="${encodeURIComponent(file.originalName)}">Download</a>
