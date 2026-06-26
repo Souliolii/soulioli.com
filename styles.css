@@ -28,6 +28,14 @@ body {
 
 header {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-left {
+  max-width: calc(100% - 140px);
 }
 
 .eyebrow {
@@ -254,23 +262,36 @@ footer {
 
 /* Home link shown on the upload page (top-right) */
 .home-link {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.5rem;
-  display: inline-block;
-  padding: 0.5rem 0.85rem;
-  background: rgba(67, 56, 202, 0.08);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem; /* slightly smaller for a compact button */
+  background: transparent; /* outline style */
   color: #4338ca;
-  border-radius: 12px;
+  border-radius: 10px;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.9rem;
+  border: 1px solid rgba(67, 56, 202, 0.18);
+  backdrop-filter: none;
 }
 
 .home-link:hover {
-  background: rgba(67, 56, 202, 0.12);
+  background: rgba(67, 56, 202, 0.04);
+  border-color: rgba(67, 56, 202, 0.28);
 }
 
+.home-link:focus {
+  outline: 3px solid rgba(67, 56, 202, 0.12);
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
 .category-group {
   margin-bottom: 2rem;
 }
