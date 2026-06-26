@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soulioli Forum Admin</title>
+    <link rel="stylesheet" href="/landing.css" />
+    <link rel="stylesheet" href="/forum.css" />
+  </head>
+  <body>
+    <div class="page forum-shell admin-shell">
+      <header class="forum-header">
+        <div class="header-left">
+          <p class="eyebrow">Forum editor</p>
+          <h1>Create topics and replies.</h1>
+          <p>Protected editor. Not linked from the public forum.</p>
+        </div>
+        <a class="home-link" href="/forum" aria-label="Forum">Forum</a>
+      </header>
+
+      <section class="admin-grid">
+        <article class="admin-card">
+          <h2>New topic</h2>
+          <form id="topic-form" class="upload-form">
+            <label>
+              Topic title
+              <input id="topic-title-input" type="text" required />
+            </label>
+            <label>
+              Opening post title
+              <input id="topic-post-title-input" type="text" placeholder="Searchable post title" required />
+            </label>
+            <label>
+              Intro post
+              <textarea id="topic-body-input" rows="5" required></textarea>
+            </label>
+            <label>
+              Tags
+              <input id="topic-tags-input" type="text" placeholder="music, design, tools" />
+            </label>
+            <div class="upload-actions">
+              <button type="submit">Publish topic</button>
+              <span id="topic-feedback" class="feedback"></span>
+            </div>
+          </form>
+        </article>
+
+        <article class="admin-card">
+          <h2>Add post to an existing topic</h2>
+          <form id="reply-form" class="upload-form">
+            <label>
+              Pick a topic
+              <select id="reply-topic-id" required></select>
+            </label>
+            <label>
+              Post title
+              <input id="reply-title-input" type="text" placeholder="Searchable post title" required />
+            </label>
+            <label>
+              Post body
+              <textarea id="reply-body-input" rows="5" required></textarea>
+            </label>
+            <div class="upload-actions">
+              <button type="submit">Add post</button>
+              <span id="reply-feedback" class="feedback"></span>
+            </div>
+          </form>
+        </article>
+
+        <article class="admin-card admin-list-card">
+          <div class="topic-section-header">
+            <h2>Recent topics</h2>
+            <span id="admin-topic-count">0 topics</span>
+          </div>
+          <div id="admin-topic-list" class="admin-topic-list"></div>
+        </article>
+      </section>
+    </div>
+    <script src="/forum-admin.js?v=3"></script>
+  </body>
+</html>

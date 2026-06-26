@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soulioli Topic</title>
+    <link rel="stylesheet" href="/landing.css" />
+    <link rel="stylesheet" href="/forum.css" />
+  </head>
+  <body>
+    <div class="page forum-shell">
+      <header class="forum-header">
+        <div class="header-left">
+          <p class="eyebrow">Soulioli Forum</p>
+          <h1 id="topic-title">Loading topic...</h1>
+          <p id="topic-summary"></p>
+        </div>
+        <div class="header-actions">
+          <a class="home-link" href="/forum">Back</a>
+          <a class="home-link" href="/">Home</a>
+        </div>
+      </header>
+
+      <section class="topic-detail-shell">
+        <article class="topic-thread-card">
+          <div class="topic-card-topline">
+            <span id="topic-meta"></span>
+            <span id="topic-tags"></span>
+          </div>
+          <div id="topic-body" class="topic-body"></div>
+        </article>
+
+        <section class="topic-replies-card">
+          <div class="topic-section-header">
+            <h2>Posts</h2>
+          </div>
+          <div id="topic-posts" class="post-list"></div>
+        </section>
+      </section>
+    </div>
+    <script src="/forum-topic.js?v=3"></script>
+  </body>
+</html>

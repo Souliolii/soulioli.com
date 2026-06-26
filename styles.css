@@ -48,7 +48,13 @@ header {
 }
 
 .header-left {
-  max-width: calc(100% - 140px);
+  max-width: calc(100% - 160px);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .eyebrow {

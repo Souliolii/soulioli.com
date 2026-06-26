@@ -62,6 +62,11 @@ Other important customizations we have added:
 
 - Landing page at `/`
 - Document share app available at `/share`
+- Simple forum page available at `/forum`
+- Forum posts stored in `uploads/forum.json`
+- Forum topics open into a detail view at `/forum/topic/:id`
+- Hidden editor available at `/forum/admin` with browser auth
+- Editor password defaults to `forumadmin` unless `FORUM_ADMIN_PASSWORD` is set
 - Dark emo/Myspace theme with neon pink accents
 - Inline video previews for uploaded video files
 - Home button on the document share page
