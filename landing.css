@@ -15,10 +15,18 @@
 
 /* 1. Global theme and default text styles */
 :root {
-  color-scheme: light;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f4f7ff;
-  color: #111827;
+  /* Palette A — Classic Emo Myspace (matching the main site) */
+  --font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: #070507;
+  --surface: #0f0810;
+  --text: #f6eef6;
+  --muted: #b9a7b9;
+  --accent: #ff2d95;
+  --accent-glow: rgba(255,45,149,0.14);
+  --secondary: #6a1b9a;
+  font-family: var(--font-family);
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* 2. Simple reset so layouts behave more predictably */
@@ -30,8 +38,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top left, rgba(67, 56, 202, 0.16), transparent 24%), #f4f7ff;
-  color: #111827;
+  background: radial-gradient(circle at top left, rgba(255,45,149,0.06), transparent 24%), var(--bg);
+  color: var(--text);
 }
 
 /* 4. Main page wrapper - this centers the whole landing page */
@@ -48,9 +56,9 @@ body {
   grid-template-columns: 1.35fr 0.9fr;
   gap: 1.5rem;
   padding: 2rem;
-  border-radius: 28px;
-  background: #ffffff;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
 }
 
 /* 6. Main headline styling */
@@ -66,7 +74,7 @@ body {
   font-size: 0.8rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #4338ca;
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -75,7 +83,7 @@ body {
   margin: 1rem 0 0;
   font-size: 1.05rem;
   line-height: 1.8;
-  color: #475569;
+  color: var(--muted);
 }
 
 /* 9. Button row under the hero text */
@@ -87,27 +95,39 @@ body {
 }
 
 /* 10. Shared button styles */
+/* 10. Shared button styles */
 .primary-btn,
 .secondary-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.95rem 1.25rem;
+  padding: 0.9rem 1.3rem;
   border-radius: 999px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
 }
 
-/* 11. Primary call-to-action button */
+/* Primary call-to-action (neon fill + glow) */
 .primary-btn {
-  background: #4338ca;
-  color: #fff;
+  background: var(--accent);
+  color: #0b0b0f;
+  box-shadow: 0 8px 30px var(--accent-glow);
+}
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px var(--accent-glow);
 }
 
-/* 12. Secondary button styling */
+/* Secondary (outlined) */
 .secondary-btn {
-  background: #eef2ff;
-  color: #3730a3;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(255,45,149,0.12);
+}
+.secondary-btn:hover {
+  background: var(--accent-glow);
+  box-shadow: 0 8px 30px var(--accent-glow);
 }
 
 /* 13. Right-side info panel inside the hero section */
