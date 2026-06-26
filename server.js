@@ -118,11 +118,19 @@ app.get('/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, 'styles.css'));
 });
 
+app.get('/landing.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'landing.css'));
+});
+
 app.get('/app.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'app.js'));
 });
 
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'landing.html'));
+});
+
+app.get('/share', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
