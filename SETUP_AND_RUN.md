@@ -90,6 +90,8 @@ Send your friends this URL:
 
 They can now visit the site, upload documents, and download files.
 
+If the file is a video (`.mp4`, `.webm`, `.ogg`, or `.mov`), it will show a preview player right in the shared file list.
+
 Send your friends this URL:
 - `https://soulioli.com`
 
@@ -97,6 +99,7 @@ They can now:
 - Visit the site
 - Upload documents
 - Download documents
+- Preview uploaded videos directly from the file list
 
 **Important:** The site only works while BOTH windows are running (the Node server AND Cloudflare Tunnel).
 
@@ -113,9 +116,12 @@ They can now:
 ### How to upload a file:
 1. Enter a title (e.g., "Budget Spreadsheet")
 2. Enter a description (e.g., "Q3 budget for team review")
-3. Click "Choose a file" and select the file
-4. Click "Upload file"
-5. Wait for the success message
+3. Enter the upload password
+4. Click "Choose a file" and select the file
+5. Click "Upload file"
+6. Wait for the success message
+
+**Upload password:** this site requires a password before a file can be uploaded. Set `UPLOAD_PASSWORD` before starting the app, or use the default upload password `upload123`.
 
 ### How friends download:
 1. They see a list of all files

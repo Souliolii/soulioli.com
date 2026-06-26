@@ -164,11 +164,18 @@ const handleUpload = async (event) => {
   showFeedback('Uploading…', 'loading');
 
   const formData = new FormData(uploadForm);
+  const password = uploadForm.querySelector('input[name="uploadPassword"]').value.trim();
   const file = uploadForm.querySelector('input[name="file"]').files[0];
+  if (!password) {
+    showFeedback('Enter the upload password.', 'error');
+    return;
+  }
   if (!file) {
     showFeedback('Please select a file before uploading.', 'error');
     return;
   }
+
+  formData.append('uploadPassword', password);
 
   try {
     const response = await fetch('/api/upload', {

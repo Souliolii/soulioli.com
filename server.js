@@ -7,6 +7,7 @@ const app = express();
 const uploadsDir = path.join(__dirname, 'uploads');
 const metadataPath = path.join(uploadsDir, 'metadata.json');
 const deletePassword = process.env.DELETE_PASSWORD || 'delete123';
+const uploadPassword = process.env.UPLOAD_PASSWORD || 'upload123';
 
 const storage = multer.diskStorage({
   destination: uploadsDir,
@@ -55,6 +56,11 @@ app.get('/api/files', async (req, res) => {
 
 app.post('/api/upload', upload.single('file'), async (req, res) => {
   try {
+    const providedPassword = String(req.body.uploadPassword || '');
+    if (providedPassword !== uploadPassword) {
+      return res.status(403).json({ error: 'Incorrect upload password.' });
+    }
+
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded.' });
     }
