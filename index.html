@@ -3,73 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>soulioli.com</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>Document Share</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header>
-        <p class="eyebrow">soulioli.com</p>
-        <h1>hi, i&rsquo;m soulioli.</h1>
-        <p>developer, creator, and lifelong tinkerer. this is the home for my projects, ideas, and links.</p>
+        <p class="eyebrow">Document Share</p>
+        <h1>Upload, describe, and share files with friends</h1>
+        <p>Use this site to upload documents and let friends download them. Each file includes a title, description, and download link.</p>
       </header>
 
-      <section class="calculator-card">
-        <div class="calculator-intro">
-          <h2>OSRS Craft Profit Calculator</h2>
-          <p>Search items by name, pick ingredients with icons, and compare their cost against the crafted item's sell value.</p>
+      <section class="upload-card">
+        <div class="upload-intro">
+          <h2>Upload a document</h2>
+          <p>Choose a file, add a title and description, and then share the download link with your friends.</p>
         </div>
 
-        <div class="calculator-form">
-          <div class="form-group">
-            <div class="search-wrap">
-              <label>
-                Crafted item
-                <input id="output-search" type="search" class="item-search" placeholder="Search item by name or paste ID" autocomplete="off" />
-              </label>
-              <span class="item-preview" id="output-preview"></span>
-              <ul class="search-suggestions"></ul>
-              <input id="output-id" type="hidden" />
-            </div>
+        <form id="upload-form" class="upload-form">
+          <label>
+            File title
+            <input id="title" name="title" type="text" placeholder="Short title for the document" required />
+          </label>
 
-            <label>
-              Output quantity
-              <input id="output-qty" type="number" min="1" value="1" />
-            </label>
+          <label>
+            Description
+            <textarea id="description" name="description" rows="3" placeholder="Describe the file for your friends"></textarea>
+          </label>
+
+          <label>
+            Choose a file
+            <input id="file" name="file" type="file" required />
+          </label>
+
+          <div class="upload-actions">
+            <button type="submit">Upload file</button>
+            <span id="upload-feedback" class="feedback"></span>
           </div>
-
-          <div id="materials"></div>
-
-          <div class="calculator-actions">
-            <button id="add-material" type="button">Add ingredient</button>
-            <button id="calculate-profit" type="button">Calculate profit</button>
-          </div>
-
-          <div id="calculator-message" class="calculator-message info">Search items above and click calculate when ready.</div>
-        </div>
-
-        <div id="calculator-result" class="calculator-result"></div>
+        </form>
       </section>
 
-      <section class="cards">
-        <article>
-          <h2>About</h2>
-          <p>Use the calculator above to test RuneScape crafting profits. The engine checks live item prices from the OSRS wiki price API and shows icons for selected items.</p>
-        </article>
+      <section class="list-card">
+        <div class="list-header">
+          <h2>Available documents</h2>
+          <p>Friends can download the files below. New uploads appear automatically after a successful upload.</p>
+        </div>
 
-        <article>
-          <h2>Links</h2>
-          <ul>
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Email</a></li>
-          </ul>
-        </article>
+        <div id="file-list" class="file-list"></div>
       </section>
 
       <footer>
-        Built for <strong>soulioli.com</strong>. Edit these files and deploy wherever you want.
+        <p>Built as a simple document upload site. Hosts must support Node.js for uploads to work.</p>
       </footer>
     </div>
     <script src="app.js"></script>

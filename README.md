@@ -1,27 +1,16 @@
-# soulioli.com
-This repo contains a simple static website scaffold for `soulioli.com`.
+﻿# Document Share
 
-## What was created
-- `index.html` — the main page with an OSRS profit calculator UI
-- `styles.css` — the site styles
-- `app.js` — live Runescape pricing, name search, and icon support
-- `favicon.svg` — browser tab logo
-- `CNAME` — optional GitHub Pages custom domain file
+A simple document upload and download website built with Node.js and Express.
 
-## Notes on item search and pricing
-- Craft and ingredient fields now support searching by item name instead of raw IDs.
-- Item selections show a small OSRS wiki icon and name for each chosen item.
-- The calculator still uses live prices from the OSRS wiki price API.
-- The API does not provide a dedicated item search route, so item names are indexed locally after a one-time mapping fetch.
-- Prices are fetched in batches for the selected item set, and repeated quotes during the same session reuse cached results when available.
-- Some craft or ingredient items may not have live Grand Exchange price data, and the calculator will now report that more clearly.
+## How to use
 
-## Next steps
-1. Open `index.html` and edit the text, headings, and links.
-2. Replace the placeholder links with your real GitHub, social, or contact URLs.
-3. Push this repo to your hosting platform of choice.
-4. Point your domain `soulioli.com` to that host.
+1. Run `npm install` in the project folder.
+2. Start the site with `npm start`.
+3. Open `http://localhost:3000` in your browser.
+4. Upload documents and share the download links with friends.
 
-## Deploy notes
-- If you use GitHub Pages, keep `CNAME` in the repository root.
-- If you use Vercel or Cloudflare Pages, follow their custom domain setup and point DNS to the values they provide.
+## Notes
+
+- Uploaded files are stored in the `uploads/` folder.
+- Metadata is saved in `uploads/metadata.json`.
+- This app requires a Node.js host; it cannot perform uploads on static-only platforms like GitHub Pages.
