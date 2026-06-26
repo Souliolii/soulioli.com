@@ -39,7 +39,7 @@ const renderFileCard = (file) => {
         `}
       </div>
       <div class="file-card-actions">
-        <a class="download-button" href="${downloadUrl}" download="${encodeURIComponent(file.originalName)}">Download</a>
+        ${file.downloadable !== false ? `<a class="download-button" href="${downloadUrl}" download="${encodeURIComponent(file.originalName)}">Download</a>` : `<span class="download-disabled">Download disabled</span>`}
         <button class="delete-button" data-id="${file.id}" type="button">Delete</button>
       </div>
     </article>
@@ -166,6 +166,7 @@ const handleUpload = async (event) => {
   const formData = new FormData(uploadForm);
   const password = uploadForm.querySelector('input[name="uploadPassword"]').value.trim();
   const file = uploadForm.querySelector('input[name="file"]').files[0];
+  const downloadable = uploadForm.querySelector('input[name="downloadable"]').checked;
   if (!password) {
     showFeedback('Enter the upload password.', 'error');
     return;
@@ -176,6 +177,7 @@ const handleUpload = async (event) => {
   }
 
   formData.append('uploadPassword', password);
+  formData.append('downloadable', downloadable ? 'true' : 'false');
 
   try {
     const response = await fetch('/api/upload', {

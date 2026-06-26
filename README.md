@@ -34,6 +34,41 @@ A simple document upload and download website built with Node.js and Express. Sh
 - `cloudflared` installed and logged in to your Cloudflare account
 - Cloudflare Tunnel set up for `soulioli.com`
 
+## Change passwords & key settings
+
+This app supports two environment-controlled passwords:
+
+- `UPLOAD_PASSWORD` — required to upload files through the form.
+- `DELETE_PASSWORD` — required to delete files from the shared list.
+
+Defaults are set in `server.js`:
+
+```js
+const deletePassword = process.env.DELETE_PASSWORD || 'delete123';
+const uploadPassword = process.env.UPLOAD_PASSWORD || 'upload123';
+```
+
+To change them without editing code, set environment variables before launching the app:
+
+```powershell
+$env:UPLOAD_PASSWORD="MyNewUploadPass"
+$env:DELETE_PASSWORD="MyNewDeletePass"
+npm start
+```
+
+If you want to hardcode a new default, edit the values above in `server.js`.
+
+Other important customizations we have added:
+
+- Landing page at `/`
+- Document share app available at `/share`
+- Dark emo/Myspace theme with neon pink accents
+- Inline video previews for uploaded video files
+- Home button on the document share page
+- Upload password requirement for all uploads
+- File-level download permission toggle for each upload
+- Delete password requirement for removing files
+
 ## Notes
 
 - This app requires Node.js; it cannot run on static-only platforms like GitHub Pages

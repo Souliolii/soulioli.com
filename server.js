@@ -68,6 +68,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
     const title = String(req.body.title || req.file.originalname).trim();
     const description = String(req.body.description || '').trim();
     const category = String(req.body.category || 'Uncategorized').trim();
+    const downloadable = String(req.body.downloadable || 'false') === 'true';
     const metadata = await readMetadata();
 
     const fileRecord = {
@@ -79,6 +80,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
       filename: req.file.filename,
       size: req.file.size,
       uploadedAt: new Date().toISOString(),
+      downloadable,
     };
 
     metadata.unshift(fileRecord);
