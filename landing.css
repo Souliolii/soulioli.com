@@ -1,3 +1,19 @@
+/*
+  LANDING PAGE STYLES
+  This file controls the look of the front page.
+  If you want to change colors, spacing, buttons, or layout, edit here.
+
+  QUICK CUSTOMIZATION GUIDE
+  - .hero-card = the big top card
+  - .primary-btn = main call-to-action button
+  - .secondary-btn = second button
+  - .feature-card = the smaller cards below the hero
+  - .hero-panel = the info box on the right side
+  - font-size / padding / margin / gap = spacing and size
+  - background / color / border-radius = visual style
+*/
+
+/* 1. Global theme and default text styles */
 :root {
   color-scheme: light;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -5,10 +21,12 @@
   color: #111827;
 }
 
+/* 2. Simple reset so layouts behave more predictably */
 * {
   box-sizing: border-box;
 }
 
+/* 3. Page background and overall body spacing */
 body {
   margin: 0;
   min-height: 100vh;
@@ -16,6 +34,7 @@ body {
   color: #111827;
 }
 
+/* 4. Main page wrapper - this centers the whole landing page */
 .hero-shell {
   width: min(1120px, calc(100% - 2rem));
   margin: 2rem auto;
@@ -23,6 +42,7 @@ body {
   gap: 1.5rem;
 }
 
+/* 5. Hero section card - biggest visual block on the page */
 .hero-card {
   display: grid;
   grid-template-columns: 1.35fr 0.9fr;
@@ -33,12 +53,14 @@ body {
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
 }
 
+/* 6. Main headline styling */
 .hero-copy h1 {
   margin: 0.5rem 0 0;
   font-size: clamp(2rem, 3.5vw, 3.2rem);
   line-height: 1.1;
 }
 
+/* 7. Small eyebrow label above the headline */
 .eyebrow {
   margin: 0;
   font-size: 0.8rem;
@@ -48,6 +70,7 @@ body {
   font-weight: 700;
 }
 
+/* 8. Intro paragraph styling */
 .lead {
   margin: 1rem 0 0;
   font-size: 1.05rem;
@@ -55,6 +78,7 @@ body {
   color: #475569;
 }
 
+/* 9. Button row under the hero text */
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +86,7 @@ body {
   margin-top: 1.5rem;
 }
 
+/* 10. Shared button styles */
 .primary-btn,
 .secondary-btn {
   display: inline-flex;
@@ -73,16 +98,19 @@ body {
   font-weight: 600;
 }
 
+/* 11. Primary call-to-action button */
 .primary-btn {
   background: #4338ca;
   color: #fff;
 }
 
+/* 12. Secondary button styling */
 .secondary-btn {
   background: #eef2ff;
   color: #3730a3;
 }
 
+/* 13. Right-side info panel inside the hero section */
 .hero-panel {
   padding: 1.4rem;
   border-radius: 22px;
@@ -101,6 +129,7 @@ body {
   line-height: 1.8;
 }
 
+/* 14. Feature cards section below the hero */
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -125,6 +154,7 @@ body {
   line-height: 1.7;
 }
 
+/* 15. Mobile adjustments */
 @media (max-width: 900px) {
   .hero-card {
     grid-template-columns: 1fr;
